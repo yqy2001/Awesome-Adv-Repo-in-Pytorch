@@ -45,6 +45,7 @@ class AT(object):
         self.best_acc = 0.0
 
         self.train_time = 0
+        self.freeat_perturbation = 0  # freeat's perturbation is not reset between epochs and minibatches
 
         if args.resume:
             print('==> Resuming from checkpoint..')
@@ -72,8 +73,7 @@ class AT(object):
                 self.train_VanillaPGD()
             self.train_time += (time.time()-start)
             self.test()
-
-        print(self.args.adv_train_method + (" training time is {:2f}".format(self.train_time)))
+            print(self.args.adv_train_method + (" training time is {:2f}".format(self.train_time)))
 
     def train_natural(self):
         self.model.train()
@@ -120,22 +120,23 @@ class AT(object):
     def train_FreeAT(self):
         """
         every time update the images, update the NN params by the way
+        perturbations are not reset between epochs and minibatches
+        AE update step size is eps not alpha
         :return:
         """
         self.model.train()
         train_loss = 0.0
         for x, y in self.dataset.train:
             x, y = x.to(self.device), y.to(self.device)
-            perturbation = torch.zeros_like(x).uniform_(-self.args.eps, self.args.eps)  # PGD's random initialization
-            # todo maybe not update input from zero, but from where it was from last epoch
+            # todo maybe different perturbations for different minibatches
             for i in range(self.args.K):
                 self.optimizer.zero_grad()
-                x_adv = (x + perturbation).detach().requires_grad_(True)
+                x_adv = (x + self.freeat_perturbation).detach().requires_grad_(True)
                 loss = self.loss_fn(self.model(x_adv), y)
                 loss.backward()
                 self.optimizer.step()  # update NN params
                 # per = per + eps * sign(grad)
-                perturbation = clip_perturbation(perturbation + self.args.eps * torch.sign(x_adv.grad), self.args.eps)
+                self.freeat_perturbation = clip_perturbation(self.freeat_perturbation + self.args.eps * torch.sign(x_adv.grad), self.args.eps)
 
                 train_loss += loss.item()
 
@@ -208,7 +209,7 @@ def run():
     parser.add_argument('--step_size', default=2.0/255, type=float, help="step size to update AE")
     parser.add_argument("--epochs", type=int, default=200, help='iter nums to train NN')
     parser.add_argument("--lr", type=float, default=0.08, help='learning rate')
-    parser.add_argument("--adv_train_method", "-atm", type=str, default="FreeAT", choices=["natural", "VanillaPGD", "FreeAT"], help="adversarial training type")
+    parser.add_argument("--adv_train_method", "-atm", type=str, default="FreeAT", choices=["Natural", "VanillaPGD", "FreeAT"], help="adversarial training type")
     parser.add_argument("--resume", '-r', action='store_true', help="resume training from checkpoint")
     parser.add_argument('--K', default=7, type=int)
     args = parser.parse_args()
