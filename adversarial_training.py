@@ -111,6 +111,8 @@ class AT(object):
                 perturbation = clip_perturbation(perturbation + self.args.step_size * torch.sign(x_adv.grad), self.args.eps)
 
                 train_loss += loss.item()
+
+            self.optimizer.zero_grad()
             x_adv = (x + perturbation).detach().requires_grad_(True)
             loss = self.loss_fn(self.model(x_adv), y)
             loss.backward()
