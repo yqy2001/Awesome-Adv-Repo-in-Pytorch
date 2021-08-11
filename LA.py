@@ -1,8 +1,3 @@
-"""
-@Author:        禹棋赢
-@StartTime:     2021/8/4 18:14
-@Filename:      adversarial_training.py
-"""
 import numpy as np
 import random
 
@@ -18,6 +13,7 @@ import torchvision
 from easydict import EasyDict
 from tqdm import tqdm
 
+from LA_pytorch import Lookahead
 from attacks.PGD import projected_gradient_descent
 from attacks.utils import clip_perturbation
 from datasets.cifar import load_cifar10
@@ -35,7 +31,8 @@ class AT(object):
             self.model = torch.nn.DataParallel(self.model)
 
         self.loss_fn = torch.nn.CrossEntropyLoss()
-        self.optimizer = torch.optim.SGD(self.model.parameters(), lr=args.lr, momentum=0.9, weight_decay=2e-4)
+        self.optimizer = torch.optim.SGD(self.model.parameters(), lr=args.lr, momentum=0.9, weight_decay=5e-4)
+        self.optimizer = Lookahead(self.optimizer, la_steps=args.la_steps)
 
         self.args = args
         self.dataset = dataset
@@ -72,6 +69,8 @@ class AT(object):
                 self.train_VanillaPGD()
             self.train_time += (time.time()-start)
             self.test()
+
+            print("This epoch's training time is {:2f}".format(time.time()-start))
 
         print(self.args.adv_train_method + (" training time is {:2f}".format(self.train_time)))
 
@@ -134,8 +133,7 @@ class AT(object):
                 loss = self.loss_fn(self.model(x_adv), y)
                 loss.backward()
                 self.optimizer.step()  # update NN params
-                # per = per + eps * sign(grad)
-                perturbation = clip_perturbation(perturbation + self.args.eps * torch.sign(x_adv.grad), self.args.eps)
+                perturbation = clip_perturbation(perturbation + self.args.step_size * torch.sign(x_adv.grad), self.args.eps)
 
                 train_loss += loss.item()
 
@@ -173,9 +171,9 @@ class AT(object):
                     os.mkdir("checkpoint")
                 torch.save({
                     'model': self.model.state_dict(),
-                    'adv_acc': acc,
+                    'acc': acc,
                     'epoch': self.epoch,
-                }, "./checkpoint/ckpt.pth")
+                }, "./checkpoint/natural_ckpt.pth")
         else:  # adversarial training, use adv_acc to measure
             if adv_acc > self.best_acc:
                 self.best_acc = adv_acc
@@ -184,9 +182,9 @@ class AT(object):
                     os.mkdir("checkpoint")
                 torch.save({
                     'model': self.model.state_dict(),
-                    'adv_acc': adv_acc,
+                    'acc': adv_acc,
                     'epoch': self.epoch,
-                }, "./checkpoint/ckpt.pth")
+                }, "./checkpoint/adv_ckpt.pth")
 
 
 # def adjust_learning_rate(optimizer, epoch):
@@ -210,7 +208,8 @@ def run():
     parser.add_argument("--lr", type=float, default=0.08, help='learning rate')
     parser.add_argument("--adv_train_method", "-atm", type=str, default="FreeAT", choices=["natural", "VanillaPGD", "FreeAT"], help="adversarial training type")
     parser.add_argument("--resume", '-r', action='store_true', help="resume training from checkpoint")
-    parser.add_argument('--K', default=7, type=int)
+    parser.add_argument('--K', type=int, default=7, help='iter nums to update AE, K in PGD-K')
+    parser.add_argument('--la_steps', type=int, default=5)  # which performs best in LA's paper
     args = parser.parse_args()
 
     # fix seed
