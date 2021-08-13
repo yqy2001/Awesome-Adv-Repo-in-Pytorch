@@ -1,0 +1,121 @@
+nohup: 忽略输入
+Files already downloaded and verified
+Files already downloaded and verified
+
+Epoch: 1/200
+train loss is 6135.651409
+test acc is 36.370000, Adversarial Examples acc is 24.320000
+This epoch's AE acc is better, Saving...
+
+Epoch: 2/200
+train loss is 5055.650381
+test acc is 38.240000, Adversarial Examples acc is 23.030000
+
+Epoch: 3/200
+train loss is 4728.146341
+test acc is 42.090000, Adversarial Examples acc is 21.080000
+
+Epoch: 4/200
+train loss is 4452.872194
+test acc is 46.250000, Adversarial Examples acc is 21.700000
+
+Epoch: 5/200
+train loss is 4217.404171
+test acc is 51.050000, Adversarial Examples acc is 24.360000
+This epoch's AE acc is better, Saving...
+
+Epoch: 6/200
+train loss is 4002.845896
+test acc is 57.460000, Adversarial Examples acc is 28.350000
+This epoch's AE acc is better, Saving...
+
+Epoch: 7/200
+train loss is 3833.796875
+test acc is 56.370000, Adversarial Examples acc is 24.260000
+
+Epoch: 8/200
+train loss is 3669.806130
+test acc is 57.070000, Adversarial Examples acc is 24.980000
+
+Epoch: 9/200
+train loss is 3542.876174
+test acc is 64.030000, Adversarial Examples acc is 27.560000
+
+Epoch: 10/200
+train loss is 3442.351474
+test acc is 63.460000, Adversarial Examples acc is 26.470000
+
+Epoch: 11/200
+train loss is 3369.566097
+test acc is 56.370000, Adversarial Examples acc is 25.890000
+
+Epoch: 12/200
+train loss is 3295.509881
+test acc is 60.950000, Adversarial Examples acc is 25.640000
+
+Epoch: 13/200
+train loss is 3219.170568
+test acc is 62.240000, Adversarial Examples acc is 28.130000
+
+Epoch: 14/200
+train loss is 3156.810349
+test acc is 64.240000, Adversarial Examples acc is 29.370000
+This epoch's AE acc is better, Saving...
+
+Epoch: 15/200
+train loss is 3112.656446
+test acc is 64.070000, Adversarial Examples acc is 24.750000
+
+Epoch: 16/200
+train loss is 3073.509005
+test acc is 63.710000, Adversarial Examples acc is 28.300000
+
+Epoch: 17/200
+train loss is 3034.412310
+test acc is 62.480000, Adversarial Examples acc is 26.500000
+
+Epoch: 18/200
+train loss is 3011.350043
+test acc is 65.080000, Adversarial Examples acc is 29.630000
+This epoch's AE acc is better, Saving...
+
+Epoch: 19/200
+train loss is 2975.676963
+test acc is 64.660000, Adversarial Examples acc is 27.000000
+
+Epoch: 20/200
+train loss is 2965.495237
+test acc is 66.480000, Adversarial Examples acc is 29.340000
+
+Epoch: 21/200
+train loss is 2926.795038
+test acc is 61.040000, Adversarial Examples acc is 26.990000
+
+Epoch: 22/200
+train loss is 2940.848604
+test acc is 62.560000, Adversarial Examples acc is 23.060000
+
+Epoch: 23/200
+train loss is 2906.073996
+test acc is 53.080000, Adversarial Examples acc is 21.800000
+
+Epoch: 24/200
+train loss is 2878.122643
+test acc is 57.450000, Adversarial Examples acc is 21.620000
+
+Epoch: 25/200
+train loss is 2874.319962
+test acc is 63.450000, Adversarial Examples acc is 24.060000
+
+Epoch: 26/200
+train loss is 2863.874293
+test acc is 62.520000, Adversarial Examples acc is 28.040000
+
+Epoch: 27/200
+train loss is 2843.446969
+test acc is 67.420000, Adversarial Examples acc is 23.240000
+
+Epoch: 28/200
+train loss is 2850.342832
+test acc is 63.900000, Adversarial Examples acc is 23.010000
+FreeAT training time is 39155.926841

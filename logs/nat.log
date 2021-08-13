@@ -1,0 +1,1006 @@
+Files already downloaded and verified
+Files already downloaded and verified
+
+Epoch: 1/200
+train loss is 903.314922
+test acc is 35.290000, Adversarial Examples acc is 22.070000
+This epoch's AE acc is better, Saving...
+Natural training time is 27.917260
+
+Epoch: 2/200
+train loss is 627.088027
+test acc is 42.830000, Adversarial Examples acc is 23.810000
+This epoch's AE acc is better, Saving...
+Natural training time is 54.625252
+
+Epoch: 3/200
+train loss is 545.280744
+test acc is 50.510000, Adversarial Examples acc is 25.860000
+This epoch's AE acc is better, Saving...
+Natural training time is 82.162677
+
+Epoch: 4/200
+train loss is 477.308309
+test acc is 52.030000, Adversarial Examples acc is 21.490000
+Natural training time is 139.546553
+
+Epoch: 5/200
+train loss is 412.344741
+test acc is 58.470000, Adversarial Examples acc is 21.730000
+Natural training time is 197.149545
+
+Epoch: 6/200
+train loss is 361.018305
+test acc is 63.420000, Adversarial Examples acc is 20.750000
+Natural training time is 254.849376
+
+Epoch: 7/200
+train loss is 324.179193
+test acc is 66.120000, Adversarial Examples acc is 22.240000
+Natural training time is 311.929524
+
+Epoch: 8/200
+train loss is 294.032467
+test acc is 68.930000, Adversarial Examples acc is 20.420000
+Natural training time is 369.497013
+
+Epoch: 9/200
+train loss is 267.492187
+test acc is 68.730000, Adversarial Examples acc is 18.260000
+Natural training time is 407.442508
+
+Epoch: 10/200
+train loss is 246.140023
+test acc is 71.120000, Adversarial Examples acc is 21.990000
+Natural training time is 434.204743
+
+Epoch: 11/200
+train loss is 223.883298
+test acc is 74.960000, Adversarial Examples acc is 26.690000
+This epoch's AE acc is better, Saving...
+Natural training time is 461.347017
+
+Epoch: 12/200
+train loss is 204.161412
+test acc is 72.260000, Adversarial Examples acc is 20.430000
+Natural training time is 488.191283
+
+Epoch: 13/200
+train loss is 185.622550
+test acc is 71.980000, Adversarial Examples acc is 19.230000
+Natural training time is 515.003970
+
+Epoch: 14/200
+train loss is 172.990246
+test acc is 75.250000, Adversarial Examples acc is 22.900000
+Natural training time is 541.892761
+
+Epoch: 15/200
+train loss is 163.212124
+test acc is 74.200000, Adversarial Examples acc is 20.580000
+Natural training time is 568.789178
+
+Epoch: 16/200
+train loss is 157.229527
+test acc is 73.850000, Adversarial Examples acc is 19.630000
+Natural training time is 595.931569
+
+Epoch: 17/200
+train loss is 146.357767
+test acc is 74.520000, Adversarial Examples acc is 20.360000
+Natural training time is 622.742342
+
+Epoch: 18/200
+train loss is 139.738317
+test acc is 77.450000, Adversarial Examples acc is 18.760000
+Natural training time is 649.672347
+
+Epoch: 19/200
+train loss is 132.390624
+test acc is 72.850000, Adversarial Examples acc is 18.310000
+Natural training time is 676.692110
+
+Epoch: 20/200
+train loss is 127.505433
+test acc is 77.000000, Adversarial Examples acc is 19.300000
+Natural training time is 703.460802
+
+Epoch: 21/200
+train loss is 123.318971
+test acc is 73.620000, Adversarial Examples acc is 13.280000
+Natural training time is 730.320282
+
+Epoch: 22/200
+train loss is 119.020266
+test acc is 75.040000, Adversarial Examples acc is 14.060000
+Natural training time is 757.316215
+
+Epoch: 23/200
+train loss is 117.588697
+test acc is 77.850000, Adversarial Examples acc is 17.770000
+Natural training time is 809.897344
+
+Epoch: 24/200
+train loss is 112.794603
+test acc is 75.540000, Adversarial Examples acc is 15.810000
+Natural training time is 867.476951
+
+Epoch: 25/200
+train loss is 109.318693
+test acc is 76.810000, Adversarial Examples acc is 16.440000
+Natural training time is 925.140775
+
+Epoch: 26/200
+train loss is 106.010700
+test acc is 72.810000, Adversarial Examples acc is 12.730000
+Natural training time is 982.723390
+
+Epoch: 27/200
+train loss is 105.554724
+test acc is 76.000000, Adversarial Examples acc is 13.350000
+Natural training time is 1040.042044
+
+Epoch: 28/200
+train loss is 100.537483
+test acc is 79.630000, Adversarial Examples acc is 17.930000
+Natural training time is 1098.018942
+
+Epoch: 29/200
+train loss is 101.281007
+test acc is 75.770000, Adversarial Examples acc is 13.950000
+Natural training time is 1155.911435
+
+Epoch: 30/200
+train loss is 98.070203
+test acc is 77.620000, Adversarial Examples acc is 14.990000
+Natural training time is 1213.530811
+
+Epoch: 31/200
+train loss is 97.927986
+test acc is 79.360000, Adversarial Examples acc is 15.340000
+Natural training time is 1271.175951
+
+Epoch: 32/200
+train loss is 96.929508
+test acc is 72.830000, Adversarial Examples acc is 13.180000
+Natural training time is 1323.794821
+
+Epoch: 33/200
+train loss is 92.615955
+test acc is 77.630000, Adversarial Examples acc is 14.340000
+Natural training time is 1381.780764
+
+Epoch: 34/200
+train loss is 89.980407
+test acc is 77.910000, Adversarial Examples acc is 14.400000
+Natural training time is 1439.789056
+
+Epoch: 35/200
+train loss is 93.526465
+test acc is 77.590000, Adversarial Examples acc is 14.300000
+Natural training time is 1497.988134
+
+Epoch: 36/200
+train loss is 91.918965
+test acc is 73.320000, Adversarial Examples acc is 10.390000
+Natural training time is 1547.706639
+
+Epoch: 37/200
+train loss is 89.190997
+test acc is 75.770000, Adversarial Examples acc is 15.570000
+Natural training time is 1604.945009
+
+Epoch: 38/200
+train loss is 89.478302
+test acc is 77.010000, Adversarial Examples acc is 13.200000
+Natural training time is 1662.313959
+
+Epoch: 39/200
+train loss is 85.826771
+test acc is 78.400000, Adversarial Examples acc is 10.210000
+Natural training time is 1720.241493
+
+Epoch: 40/200
+train loss is 90.653092
+test acc is 79.170000, Adversarial Examples acc is 12.570000
+Natural training time is 1777.660642
+
+Epoch: 41/200
+train loss is 84.887443
+test acc is 77.850000, Adversarial Examples acc is 10.790000
+Natural training time is 1835.272164
+
+Epoch: 42/200
+train loss is 85.547830
+test acc is 76.530000, Adversarial Examples acc is 11.590000
+Natural training time is 1892.421631
+
+Epoch: 43/200
+train loss is 86.226905
+test acc is 77.960000, Adversarial Examples acc is 13.480000
+Natural training time is 1949.912637
+
+Epoch: 44/200
+train loss is 83.841879
+test acc is 76.390000, Adversarial Examples acc is 11.090000
+Natural training time is 2007.370297
+
+Epoch: 45/200
+train loss is 82.924547
+test acc is 78.730000, Adversarial Examples acc is 10.820000
+Natural training time is 2064.804208
+
+Epoch: 46/200
+train loss is 85.214130
+test acc is 78.720000, Adversarial Examples acc is 10.340000
+Natural training time is 2111.419576
+
+Epoch: 47/200
+train loss is 82.266988
+test acc is 78.930000, Adversarial Examples acc is 14.050000
+Natural training time is 2169.226330
+
+Epoch: 48/200
+train loss is 82.861674
+test acc is 76.520000, Adversarial Examples acc is 14.390000
+Natural training time is 2226.819126
+
+Epoch: 49/200
+train loss is 81.497707
+test acc is 79.430000, Adversarial Examples acc is 12.020000
+Natural training time is 2284.169977
+
+Epoch: 50/200
+train loss is 81.078317
+test acc is 75.030000, Adversarial Examples acc is 12.670000
+Natural training time is 2341.722371
+
+Epoch: 51/200
+train loss is 84.141578
+test acc is 79.240000, Adversarial Examples acc is 9.040000
+Natural training time is 2399.281369
+
+Epoch: 52/200
+train loss is 80.436788
+test acc is 79.230000, Adversarial Examples acc is 11.650000
+Natural training time is 2457.222346
+
+Epoch: 53/200
+train loss is 80.220582
+test acc is 80.490000, Adversarial Examples acc is 12.560000
+Natural training time is 2514.733544
+
+Epoch: 54/200
+train loss is 80.453925
+test acc is 80.800000, Adversarial Examples acc is 13.490000
+Natural training time is 2572.051134
+
+Epoch: 55/200
+train loss is 77.049876
+test acc is 78.210000, Adversarial Examples acc is 9.220000
+Natural training time is 2629.586961
+
+Epoch: 56/200
+train loss is 80.577121
+test acc is 78.490000, Adversarial Examples acc is 12.150000
+Natural training time is 2687.141106
+
+Epoch: 57/200
+train loss is 76.089163
+test acc is 80.570000, Adversarial Examples acc is 10.670000
+Natural training time is 2744.760243
+
+Epoch: 58/200
+train loss is 79.345771
+test acc is 79.640000, Adversarial Examples acc is 11.110000
+Natural training time is 2802.756451
+
+Epoch: 59/200
+train loss is 78.308671
+test acc is 74.840000, Adversarial Examples acc is 10.110000
+Natural training time is 2860.472105
+
+Epoch: 60/200
+train loss is 78.457340
+test acc is 77.900000, Adversarial Examples acc is 13.170000
+Natural training time is 2917.573779
+
+Epoch: 61/200
+train loss is 77.201407
+test acc is 78.030000, Adversarial Examples acc is 8.340000
+Natural training time is 2975.262867
+
+Epoch: 62/200
+train loss is 77.953729
+test acc is 76.370000, Adversarial Examples acc is 11.840000
+Natural training time is 3032.767017
+
+Epoch: 63/200
+train loss is 77.477606
+test acc is 79.230000, Adversarial Examples acc is 13.380000
+Natural training time is 3090.344006
+
+Epoch: 64/200
+train loss is 77.242646
+test acc is 78.980000, Adversarial Examples acc is 11.490000
+Natural training time is 3147.899284
+
+Epoch: 65/200
+train loss is 76.235533
+test acc is 80.950000, Adversarial Examples acc is 10.590000
+Natural training time is 3205.398411
+
+Epoch: 66/200
+train loss is 75.312265
+test acc is 79.880000, Adversarial Examples acc is 12.660000
+Natural training time is 3263.383978
+
+Epoch: 67/200
+train loss is 75.020609
+test acc is 81.590000, Adversarial Examples acc is 10.950000
+Natural training time is 3320.777699
+
+Epoch: 68/200
+train loss is 76.513338
+test acc is 77.270000, Adversarial Examples acc is 12.930000
+Natural training time is 3378.008552
+
+Epoch: 69/200
+train loss is 76.070292
+test acc is 81.340000, Adversarial Examples acc is 11.930000
+Natural training time is 3435.589889
+
+Epoch: 70/200
+train loss is 76.153746
+test acc is 79.100000, Adversarial Examples acc is 10.060000
+Natural training time is 3493.638431
+
+Epoch: 71/200
+train loss is 75.860917
+test acc is 78.510000, Adversarial Examples acc is 10.700000
+Natural training time is 3551.190649
+
+Epoch: 72/200
+train loss is 77.463505
+test acc is 77.460000, Adversarial Examples acc is 9.320000
+Natural training time is 3608.804181
+
+Epoch: 73/200
+train loss is 73.560467
+test acc is 78.140000, Adversarial Examples acc is 7.480000
+Natural training time is 3665.862018
+
+Epoch: 74/200
+train loss is 73.161769
+test acc is 81.270000, Adversarial Examples acc is 10.410000
+Natural training time is 3723.651081
+
+Epoch: 75/200
+train loss is 78.194611
+test acc is 78.360000, Adversarial Examples acc is 11.200000
+Natural training time is 3781.199598
+
+Epoch: 76/200
+train loss is 75.818017
+test acc is 78.620000, Adversarial Examples acc is 9.960000
+Natural training time is 3838.802415
+
+Epoch: 77/200
+train loss is 74.398474
+test acc is 81.870000, Adversarial Examples acc is 9.900000
+Natural training time is 3897.003622
+
+Epoch: 78/200
+train loss is 74.798112
+test acc is 77.270000, Adversarial Examples acc is 9.450000
+Natural training time is 3954.688781
+
+Epoch: 79/200
+train loss is 73.981299
+test acc is 77.350000, Adversarial Examples acc is 11.780000
+Natural training time is 4012.321676
+
+Epoch: 80/200
+train loss is 75.483425
+test acc is 81.750000, Adversarial Examples acc is 11.160000
+Natural training time is 4069.692726
+
+Epoch: 81/200
+train loss is 73.371763
+test acc is 81.080000, Adversarial Examples acc is 11.040000
+Natural training time is 4127.567395
+
+Epoch: 82/200
+train loss is 73.010866
+test acc is 77.750000, Adversarial Examples acc is 5.550000
+Natural training time is 4185.302806
+
+Epoch: 83/200
+train loss is 75.517088
+test acc is 78.920000, Adversarial Examples acc is 8.950000
+Natural training time is 4242.692590
+
+Epoch: 84/200
+train loss is 72.897807
+test acc is 78.770000, Adversarial Examples acc is 7.930000
+Natural training time is 4300.025916
+
+Epoch: 85/200
+train loss is 73.664045
+test acc is 81.490000, Adversarial Examples acc is 9.780000
+Natural training time is 4357.448715
+
+Epoch: 86/200
+train loss is 70.569589
+test acc is 78.630000, Adversarial Examples acc is 6.340000
+Natural training time is 4414.926434
+
+Epoch: 87/200
+train loss is 76.197721
+test acc is 79.580000, Adversarial Examples acc is 9.220000
+Natural training time is 4472.618594
+
+Epoch: 88/200
+train loss is 74.431279
+test acc is 75.810000, Adversarial Examples acc is 11.320000
+Natural training time is 4530.102400
+
+Epoch: 89/200
+train loss is 74.982923
+test acc is 79.350000, Adversarial Examples acc is 7.740000
+Natural training time is 4587.820718
+
+Epoch: 90/200
+train loss is 73.162458
+test acc is 80.810000, Adversarial Examples acc is 8.780000
+Natural training time is 4645.532727
+
+Epoch: 91/200
+train loss is 73.431713
+test acc is 77.100000, Adversarial Examples acc is 9.850000
+Natural training time is 4703.012935
+
+Epoch: 92/200
+train loss is 72.728821
+test acc is 78.410000, Adversarial Examples acc is 11.560000
+Natural training time is 4760.443230
+
+Epoch: 93/200
+train loss is 76.030087
+test acc is 81.390000, Adversarial Examples acc is 10.330000
+Natural training time is 4818.109877
+
+Epoch: 94/200
+train loss is 72.623840
+test acc is 81.210000, Adversarial Examples acc is 11.820000
+Natural training time is 4876.136587
+
+Epoch: 95/200
+train loss is 72.764050
+test acc is 81.190000, Adversarial Examples acc is 9.440000
+Natural training time is 4933.798034
+
+Epoch: 96/200
+train loss is 74.218626
+test acc is 80.930000, Adversarial Examples acc is 10.710000
+Natural training time is 4991.312425
+
+Epoch: 97/200
+train loss is 71.530904
+test acc is 79.580000, Adversarial Examples acc is 12.290000
+Natural training time is 5048.294250
+
+Epoch: 98/200
+train loss is 71.236251
+test acc is 79.680000, Adversarial Examples acc is 7.090000
+Natural training time is 5105.885041
+
+Epoch: 99/200
+train loss is 71.696787
+test acc is 74.900000, Adversarial Examples acc is 13.850000
+Natural training time is 5163.596409
+
+Epoch: 100/200
+train loss is 72.386610
+test acc is 76.260000, Adversarial Examples acc is 12.800000
+Natural training time is 5220.863759
+
+Epoch: 101/200
+train loss is 75.436706
+test acc is 80.250000, Adversarial Examples acc is 9.820000
+Natural training time is 5278.841022
+
+Epoch: 102/200
+train loss is 72.450288
+test acc is 80.010000, Adversarial Examples acc is 11.380000
+Natural training time is 5336.145027
+
+Epoch: 103/200
+train loss is 71.940738
+test acc is 80.320000, Adversarial Examples acc is 6.810000
+Natural training time is 5393.755957
+
+Epoch: 104/200
+train loss is 72.797225
+test acc is 78.140000, Adversarial Examples acc is 7.590000
+Natural training time is 5450.996915
+
+Epoch: 105/200
+train loss is 73.616741
+test acc is 80.230000, Adversarial Examples acc is 11.250000
+Natural training time is 5508.611201
+
+Epoch: 106/200
+train loss is 71.930883
+test acc is 80.740000, Adversarial Examples acc is 11.960000
+Natural training time is 5565.974896
+
+Epoch: 107/200
+train loss is 71.646219
+test acc is 81.030000, Adversarial Examples acc is 9.160000
+Natural training time is 5623.409643
+
+Epoch: 108/200
+train loss is 71.574429
+test acc is 81.410000, Adversarial Examples acc is 12.130000
+Natural training time is 5680.963263
+
+Epoch: 109/200
+train loss is 72.519599
+test acc is 79.090000, Adversarial Examples acc is 9.190000
+Natural training time is 5738.280915
+
+Epoch: 110/200
+train loss is 74.451144
+test acc is 80.220000, Adversarial Examples acc is 11.630000
+Natural training time is 5795.781172
+
+Epoch: 111/200
+train loss is 70.509151
+test acc is 78.970000, Adversarial Examples acc is 9.740000
+Natural training time is 5853.239161
+
+Epoch: 112/200
+train loss is 73.061150
+test acc is 80.540000, Adversarial Examples acc is 9.210000
+Natural training time is 5910.819622
+
+Epoch: 113/200
+train loss is 69.163080
+test acc is 78.240000, Adversarial Examples acc is 8.610000
+Natural training time is 5968.166100
+
+Epoch: 114/200
+train loss is 70.045115
+test acc is 78.930000, Adversarial Examples acc is 6.520000
+Natural training time is 6025.524536
+
+Epoch: 115/200
+train loss is 71.038957
+test acc is 80.030000, Adversarial Examples acc is 9.780000
+Natural training time is 6082.784689
+
+Epoch: 116/200
+train loss is 72.130430
+test acc is 79.680000, Adversarial Examples acc is 7.960000
+Natural training time is 6140.753330
+
+Epoch: 117/200
+train loss is 71.430692
+test acc is 82.240000, Adversarial Examples acc is 9.190000
+Natural training time is 6198.304292
+
+Epoch: 118/200
+train loss is 73.801870
+test acc is 76.280000, Adversarial Examples acc is 6.850000
+Natural training time is 6256.388384
+
+Epoch: 119/200
+train loss is 70.398147
+test acc is 79.210000, Adversarial Examples acc is 8.400000
+Natural training time is 6314.075154
+
+Epoch: 120/200
+train loss is 69.060232
+test acc is 80.800000, Adversarial Examples acc is 7.640000
+Natural training time is 6371.834211
+
+Epoch: 121/200
+train loss is 72.654457
+test acc is 78.570000, Adversarial Examples acc is 11.150000
+Natural training time is 6429.095881
+
+Epoch: 122/200
+train loss is 70.579377
+test acc is 80.550000, Adversarial Examples acc is 10.170000
+Natural training time is 6486.358680
+
+Epoch: 123/200
+train loss is 72.907193
+test acc is 78.050000, Adversarial Examples acc is 10.310000
+Natural training time is 6544.132169
+
+Epoch: 124/200
+train loss is 70.491041
+test acc is 80.680000, Adversarial Examples acc is 7.530000
+Natural training time is 6601.515093
+
+Epoch: 125/200
+train loss is 73.103727
+test acc is 77.610000, Adversarial Examples acc is 8.760000
+Natural training time is 6659.737284
+
+Epoch: 126/200
+train loss is 72.502592
+test acc is 78.570000, Adversarial Examples acc is 10.810000
+Natural training time is 6717.547327
+
+Epoch: 127/200
+train loss is 69.840533
+test acc is 78.850000, Adversarial Examples acc is 8.330000
+Natural training time is 6775.074104
+
+Epoch: 128/200
+train loss is 68.395880
+test acc is 82.040000, Adversarial Examples acc is 12.120000
+Natural training time is 6832.275835
+
+Epoch: 129/200
+train loss is 69.641683
+test acc is 80.680000, Adversarial Examples acc is 7.280000
+Natural training time is 6890.070061
+
+Epoch: 130/200
+train loss is 68.833459
+test acc is 77.990000, Adversarial Examples acc is 8.490000
+Natural training time is 6947.552501
+
+Epoch: 131/200
+train loss is 73.063751
+test acc is 79.250000, Adversarial Examples acc is 11.680000
+Natural training time is 7005.321435
+
+Epoch: 132/200
+train loss is 69.631913
+test acc is 79.360000, Adversarial Examples acc is 11.020000
+Natural training time is 7062.852613
+
+Epoch: 133/200
+train loss is 72.937804
+test acc is 82.210000, Adversarial Examples acc is 8.940000
+Natural training time is 7120.218900
+
+Epoch: 134/200
+train loss is 71.712050
+test acc is 80.410000, Adversarial Examples acc is 9.450000
+Natural training time is 7177.847424
+
+Epoch: 135/200
+train loss is 73.025017
+test acc is 81.150000, Adversarial Examples acc is 10.110000
+Natural training time is 7235.360091
+
+Epoch: 136/200
+train loss is 71.476186
+test acc is 79.510000, Adversarial Examples acc is 12.580000
+Natural training time is 7292.869112
+
+Epoch: 137/200
+train loss is 72.086762
+test acc is 80.560000, Adversarial Examples acc is 9.120000
+Natural training time is 7350.054660
+
+Epoch: 138/200
+train loss is 71.667570
+test acc is 83.020000, Adversarial Examples acc is 10.920000
+Natural training time is 7407.275890
+
+Epoch: 139/200
+train loss is 67.227183
+test acc is 81.410000, Adversarial Examples acc is 12.870000
+Natural training time is 7464.631319
+
+Epoch: 140/200
+train loss is 69.774826
+test acc is 80.600000, Adversarial Examples acc is 10.660000
+Natural training time is 7522.041494
+
+Epoch: 141/200
+train loss is 70.769602
+test acc is 79.380000, Adversarial Examples acc is 7.730000
+Natural training time is 7580.065088
+
+Epoch: 142/200
+train loss is 70.713512
+test acc is 78.160000, Adversarial Examples acc is 7.130000
+Natural training time is 7638.099779
+
+Epoch: 143/200
+train loss is 67.709534
+test acc is 79.660000, Adversarial Examples acc is 8.920000
+Natural training time is 7664.703268
+
+Epoch: 144/200
+train loss is 73.417842
+test acc is 75.090000, Adversarial Examples acc is 7.340000
+Natural training time is 7691.430040
+
+Epoch: 145/200
+train loss is 71.698058
+test acc is 80.500000, Adversarial Examples acc is 10.820000
+Natural training time is 7718.235028
+
+Epoch: 146/200
+train loss is 69.946274
+test acc is 80.440000, Adversarial Examples acc is 9.060000
+Natural training time is 7744.682588
+
+Epoch: 147/200
+train loss is 69.171958
+test acc is 79.550000, Adversarial Examples acc is 9.420000
+Natural training time is 7771.339220
+
+Epoch: 148/200
+train loss is 71.042450
+test acc is 79.940000, Adversarial Examples acc is 9.360000
+Natural training time is 7798.037282
+
+Epoch: 149/200
+train loss is 71.040346
+test acc is 81.730000, Adversarial Examples acc is 8.460000
+Natural training time is 7825.054838
+
+Epoch: 150/200
+train loss is 70.506999
+test acc is 81.020000, Adversarial Examples acc is 10.310000
+Natural training time is 7852.240601
+
+Epoch: 151/200
+train loss is 67.467389
+test acc is 80.560000, Adversarial Examples acc is 11.810000
+Natural training time is 7879.003251
+
+Epoch: 152/200
+train loss is 68.358797
+test acc is 82.750000, Adversarial Examples acc is 11.400000
+Natural training time is 7905.765450
+
+Epoch: 153/200
+train loss is 71.458574
+test acc is 79.650000, Adversarial Examples acc is 8.110000
+Natural training time is 7932.920052
+
+Epoch: 154/200
+train loss is 68.093663
+test acc is 80.240000, Adversarial Examples acc is 10.080000
+Natural training time is 7959.615978
+
+Epoch: 155/200
+train loss is 70.553658
+test acc is 77.460000, Adversarial Examples acc is 8.410000
+Natural training time is 7986.517278
+
+Epoch: 156/200
+train loss is 69.479960
+test acc is 80.900000, Adversarial Examples acc is 11.260000
+Natural training time is 8013.550482
+
+Epoch: 157/200
+train loss is 71.517913
+test acc is 81.000000, Adversarial Examples acc is 11.460000
+Natural training time is 8040.809906
+
+Epoch: 158/200
+train loss is 69.365022
+test acc is 80.430000, Adversarial Examples acc is 7.920000
+Natural training time is 8067.452485
+
+Epoch: 159/200
+train loss is 69.579518
+test acc is 80.070000, Adversarial Examples acc is 10.080000
+Natural training time is 8094.697846
+
+Epoch: 160/200
+train loss is 68.819046
+test acc is 78.720000, Adversarial Examples acc is 9.810000
+Natural training time is 8121.432323
+
+Epoch: 161/200
+train loss is 70.372544
+test acc is 82.050000, Adversarial Examples acc is 13.190000
+Natural training time is 8148.527680
+
+Epoch: 162/200
+train loss is 70.487013
+test acc is 80.980000, Adversarial Examples acc is 13.710000
+Natural training time is 8176.106657
+
+Epoch: 163/200
+train loss is 68.296346
+test acc is 80.510000, Adversarial Examples acc is 10.070000
+Natural training time is 8202.781235
+
+Epoch: 164/200
+train loss is 70.478293
+test acc is 78.380000, Adversarial Examples acc is 8.620000
+Natural training time is 8229.603433
+
+Epoch: 165/200
+train loss is 68.054182
+test acc is 78.000000, Adversarial Examples acc is 8.290000
+Natural training time is 8256.468579
+
+Epoch: 166/200
+train loss is 73.328010
+test acc is 80.200000, Adversarial Examples acc is 12.830000
+Natural training time is 8283.489288
+
+Epoch: 167/200
+train loss is 67.862379
+test acc is 77.610000, Adversarial Examples acc is 12.530000
+Natural training time is 8310.240376
+
+Epoch: 168/200
+train loss is 68.186222
+test acc is 80.620000, Adversarial Examples acc is 6.820000
+Natural training time is 8336.964216
+
+Epoch: 169/200
+train loss is 70.985346
+test acc is 81.820000, Adversarial Examples acc is 9.070000
+Natural training time is 8363.885211
+
+Epoch: 170/200
+train loss is 66.537804
+test acc is 79.730000, Adversarial Examples acc is 8.580000
+Natural training time is 8390.626190
+
+Epoch: 171/200
+train loss is 70.604996
+test acc is 78.860000, Adversarial Examples acc is 8.730000
+Natural training time is 8417.450723
+
+Epoch: 172/200
+train loss is 71.022664
+test acc is 81.820000, Adversarial Examples acc is 11.900000
+Natural training time is 8444.256041
+
+Epoch: 173/200
+train loss is 69.398156
+test acc is 82.360000, Adversarial Examples acc is 7.920000
+Natural training time is 8471.238973
+
+Epoch: 174/200
+train loss is 66.744273
+test acc is 81.720000, Adversarial Examples acc is 8.150000
+Natural training time is 8498.406305
+
+Epoch: 175/200
+train loss is 71.946346
+test acc is 77.660000, Adversarial Examples acc is 12.050000
+Natural training time is 8525.164422
+
+Epoch: 176/200
+train loss is 71.861341
+test acc is 81.410000, Adversarial Examples acc is 8.300000
+Natural training time is 8551.942342
+
+Epoch: 177/200
+train loss is 69.284271
+test acc is 80.390000, Adversarial Examples acc is 11.470000
+Natural training time is 8578.660979
+
+Epoch: 178/200
+train loss is 68.717128
+test acc is 80.080000, Adversarial Examples acc is 11.900000
+Natural training time is 8605.343792
+
+Epoch: 179/200
+train loss is 70.161398
+test acc is 80.860000, Adversarial Examples acc is 13.020000
+Natural training time is 8632.163630
+
+Epoch: 180/200
+train loss is 66.956048
+test acc is 81.130000, Adversarial Examples acc is 11.630000
+Natural training time is 8658.853526
+
+Epoch: 181/200
+train loss is 69.583362
+test acc is 82.030000, Adversarial Examples acc is 11.900000
+Natural training time is 8685.586616
+
+Epoch: 182/200
+train loss is 69.202410
+test acc is 81.260000, Adversarial Examples acc is 7.460000
+Natural training time is 8712.387187
+
+Epoch: 183/200
+train loss is 69.831904
+test acc is 77.580000, Adversarial Examples acc is 10.230000
+Natural training time is 8739.215141
+
+Epoch: 184/200
+train loss is 71.785350
+test acc is 78.940000, Adversarial Examples acc is 9.940000
+Natural training time is 8766.063169
+
+Epoch: 185/200
+train loss is 68.463294
+test acc is 80.780000, Adversarial Examples acc is 11.980000
+Natural training time is 8793.160982
+
+Epoch: 186/200
+train loss is 67.995858
+test acc is 79.960000, Adversarial Examples acc is 9.950000
+Natural training time is 8819.966611
+
+Epoch: 187/200
+train loss is 70.542534
+test acc is 80.940000, Adversarial Examples acc is 11.440000
+Natural training time is 8848.522255
+
+Epoch: 188/200
+train loss is 69.426293
+test acc is 80.970000, Adversarial Examples acc is 9.270000
+Natural training time is 8875.806495
+
+Epoch: 189/200
+train loss is 69.845909
+test acc is 81.570000, Adversarial Examples acc is 10.660000
+Natural training time is 8904.132153
+
+Epoch: 190/200
+train loss is 67.945662
+test acc is 81.890000, Adversarial Examples acc is 9.350000
+Natural training time is 8931.305149
+
+Epoch: 191/200
+train loss is 68.791706
+test acc is 81.230000, Adversarial Examples acc is 10.810000
+Natural training time is 8958.255548
+
+Epoch: 192/200
+train loss is 67.671349
+test acc is 76.660000, Adversarial Examples acc is 7.310000
+Natural training time is 8984.986702
+
+Epoch: 193/200
+train loss is 65.834925
+test acc is 80.040000, Adversarial Examples acc is 10.410000
+Natural training time is 9011.822800
+
+Epoch: 194/200
+train loss is 69.213997
+test acc is 78.940000, Adversarial Examples acc is 9.210000
+Natural training time is 9038.352008
+
+Epoch: 195/200
+train loss is 69.598478
+test acc is 79.920000, Adversarial Examples acc is 7.130000
+Natural training time is 9065.177858
+
+Epoch: 196/200
+train loss is 67.005698
+test acc is 78.790000, Adversarial Examples acc is 7.670000
+Natural training time is 9092.062243
+
+Epoch: 197/200
+train loss is 72.602693
+test acc is 81.210000, Adversarial Examples acc is 8.960000
+Natural training time is 9118.854852
+
+Epoch: 198/200
+train loss is 68.574134
+test acc is 79.640000, Adversarial Examples acc is 10.270000
+Natural training time is 9145.878563
+
+Epoch: 199/200
+train loss is 68.018196
+test acc is 80.400000, Adversarial Examples acc is 7.520000
+Natural training time is 9172.968162
+
+Epoch: 200/200
+train loss is 66.271612
+test acc is 81.160000, Adversarial Examples acc is 9.090000
+Natural training time is 9199.913562

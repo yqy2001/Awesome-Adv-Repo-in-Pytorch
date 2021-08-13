@@ -42,7 +42,8 @@ class AT(object):
         self.best_acc = 0.0
 
         self.train_time = 0
-        self.freeat_perturbation = 0  # freeat's perturbation is not reset between epochs and minibatches
+        self.freeat_perturbation = torch.zeros((args.batch_size, 3, 32, 32))  # freeat's perturbation is not reset between epochs and minibatches
+        self.freeat_perturbation = self.freeat_perturbation.to(self.device)
 
         if args.resume:
             print('==> Resuming from checkpoint..')
@@ -124,17 +125,17 @@ class AT(object):
         """
         self.model.train()
         train_loss = 0.0
-        for x, y in self.dataset.train:
+        for x, y in tqdm(self.dataset.train):
             x, y = x.to(self.device), y.to(self.device)
             # todo maybe different perturbations for different minibatches
             for i in range(self.args.K):
                 self.optimizer.zero_grad()
-                x_adv = (x + self.freeat_perturbation).detach().requires_grad_(True)
+                x_adv = (x + self.freeat_perturbation[0:x.shape[0]]).detach().requires_grad_(True)
                 loss = self.loss_fn(self.model(x_adv), y)
                 loss.backward()
                 self.optimizer.step()  # update NN params
                 # per = per + eps * sign(grad)
-                self.freeat_perturbation = clip_perturbation(self.freeat_perturbation + self.args.eps * torch.sign(x_adv.grad), self.args.eps)
+                self.freeat_perturbation[0:x.shape[0]] = clip_perturbation(self.freeat_perturbation[0:x.shape[0]] + self.args.eps * torch.sign(x_adv.grad), self.args.eps)
 
                 train_loss += loss.item()
 
@@ -203,6 +204,7 @@ def run():
     parser = argparse.ArgumentParser()
     parser.add_argument('--seed', default=5252520, type=int)
 
+    parser.add_argument('--batch_size', "-bsz", default=128, type=int)
     parser.add_argument('--eps', default=8.0/255, type=float)
     parser.add_argument('--step_size', default=2.0/255, type=float, help="step size to update AE")
     parser.add_argument("--epochs", type=int, default=200, help='iter nums to train NN')
@@ -220,7 +222,7 @@ def run():
     torch.cuda.manual_seed(seed)
     np.random.seed(seed)
 
-    cifar10 = load_cifar10()
+    cifar10 = load_cifar10(args.batch_size)
     model = ResNet50()
     at = AT(cifar10, model, args)
     at.process()
