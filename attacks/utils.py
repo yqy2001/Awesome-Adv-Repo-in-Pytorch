@@ -15,4 +15,9 @@ def clip_perturbation(pb, eps, norm='inf'):
     :return: the cliped perturbation
     """
     if norm == "inf":
-        return torch.clip(pb, -eps, eps)
+        if torch.is_tensor(eps):
+            for i in range(eps.shape[0]):
+                pb[:, i, :, :] = torch.clip(pb[:, i, :, :], -eps[i], eps[i])
+            return pb
+        else:
+            return torch.clip(pb, -eps, eps)

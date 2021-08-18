@@ -14,12 +14,16 @@ from attacks.FGM import fast_gradient_method
 from attacks.PGD import projected_gradient_descent
 from datasets.mnist import load_mnist
 from networks.CNN import CNN
+from networks.CNN_reverse import CNN_reverse
 
 
 def train_attack():
     data = load_mnist()  # Load train and test data
 
-    model = CNN(in_channels=1)  # mnist数据集通道数为1
+    if args.model == "CNN":
+        model = CNN(in_channels=1)  # mnist数据集通道数为1
+    elif args.model == "CNN_R":
+        model = CNN_reverse(in_channels=1)  # mnist数据集通道数为1
     loss_fn = nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
 
@@ -70,6 +74,7 @@ if __name__ == '__main__':
     parser.add_argument("--iter", type=int, default=40, help='iter nums to update AE, K in PGD-K')
     parser.add_argument("--lr", type=float, default=0.01, help='learning rate of iterative attack method')
     parser.add_argument("--atm", type=str, default="pgd", help="which attack method to use")
+    parser.add_argument("--model", type=str, default="CNN_R", help="which attack method to use")
     args = parser.parse_args()
 
     train_attack()

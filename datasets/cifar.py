@@ -14,6 +14,9 @@ _DATA_cifar100 = "datasets/cifar100/"
 cifar10_mean = (0.4914, 0.4822, 0.4465)
 cifar10_std = (0.2471, 0.2435, 0.2616)
 
+mu_tensor = torch.tensor(cifar10_mean).view(3,1,1)
+std_tensor = torch.tensor(cifar10_std).view(3,1,1)
+
 
 def load_cifar10(bsz):
     """

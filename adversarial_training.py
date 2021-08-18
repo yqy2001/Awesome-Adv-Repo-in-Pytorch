@@ -20,7 +20,7 @@ from tqdm import tqdm
 
 from attacks.PGD import projected_gradient_descent
 from attacks.utils import clip_perturbation
-from datasets.cifar import load_cifar10
+from datasets.cifar import *
 from networks.resnet import ResNet50
 
 
@@ -154,13 +154,19 @@ class AT(object):
     def train_FastAT(self):
         self.model.train()
         train_loss = 0.
+        eps = (self.args.eps / mu_tensor).to(self.device)
+        step_size = (self.args.step_size / std_tensor).to(self.device)
         for x, y in self.dataset.train:
             x, y = x.to(self.device), y.to(self.device)
-            perturbation = torch.zeros_like(x).uniform_(-self.args.eps, self.args.eps)
+            # perturbation = torch.zeros_like(x).uniform_(-self.args.eps, self.args.eps)
+            perturbation = torch.zeros_like(x).to(self.device)
+            for i in range(eps.shape[0]):
+                perturbation[:, i, :, :].uniform_(-eps[i].item(), eps[i].item())
             x_adv = (x + perturbation).detach().requires_grad_(True)
             loss = self.loss_fn(self.model(x_adv), y)
             loss.backward()
-            perturbation = clip_perturbation(perturbation + self.args.step_size * x_adv.grad, self.args.eps)
+            # perturbation = clip_perturbation(perturbation + self.args.step_size * x_adv.grad, self.args.eps)
+            perturbation = clip_perturbation(perturbation + step_size * x_adv.grad, eps)
 
             x_adv = x + perturbation
             self.optimizer.zero_grad()
@@ -239,7 +245,7 @@ def run():
     parser.add_argument('--step_size', default=10.0/255, type=float, help="step size to update AE")
     parser.add_argument("--epochs", type=int, default=200, help='iter nums to train NN')
     parser.add_argument("--lr", type=float, default=0.08, help='learning rate')
-    parser.add_argument("--adv_train_method", "-atm", type=str, default="FreeAT", choices=["Natural", "VanillaPGD", "FreeAT", "FastAT"], help="adversarial training type")
+    parser.add_argument("--adv_train_method", "-atm", type=str, default="FastAT", choices=["Natural", "VanillaPGD", "FreeAT", "FastAT"], help="adversarial training type")
     parser.add_argument("--resume", '-r', action='store_true', help="resume training from checkpoint")
     parser.add_argument('--K', default=7, type=int)
     args = parser.parse_args()
