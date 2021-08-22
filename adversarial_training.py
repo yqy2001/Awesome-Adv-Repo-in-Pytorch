@@ -248,6 +248,8 @@ def run():
     parser.add_argument("--adv_train_method", "-atm", type=str, default="FastAT", choices=["Natural", "VanillaPGD", "FreeAT", "FastAT"], help="adversarial training type")
     parser.add_argument("--resume", '-r', action='store_true', help="resume training from checkpoint")
     parser.add_argument('--K', default=7, type=int)
+
+    parser.add_argument("--mode", type=int, choices=[0, 1, 2])
     args = parser.parse_args()
 
     # fix seed
@@ -257,7 +259,7 @@ def run():
     torch.cuda.manual_seed(seed)
     np.random.seed(seed)
 
-    cifar10 = load_cifar10(args.batch_size)
+    cifar10 = load_cifar10(args.batch_size, args.mode)
     model = ResNet50()
     at = AT(cifar10, model, args)
     at.process()
