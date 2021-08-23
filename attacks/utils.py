@@ -20,4 +20,4 @@ def clip_perturbation(pb, eps, norm='inf'):
                 pb[:, i, :, :] = torch.clip(pb[:, i, :, :], -eps[i], eps[i])
             return pb
         else:
-            return torch.clip(pb, -eps, eps)
+            return torch.clamp(pb, -eps, eps)

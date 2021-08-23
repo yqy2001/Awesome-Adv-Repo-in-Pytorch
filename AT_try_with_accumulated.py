@@ -1,8 +1,9 @@
 """
 @Author:        禹棋赢
-@StartTime:     2021/8/4 18:14
-@Filename:      adversarial_training.py
+@StartTime:     2021/8/22 19:09
+@Filename:      AT_try_with_accumulated.py
 """
+
 import numpy as np
 import random
 
@@ -48,6 +49,8 @@ class AT(object):
         self.freeat_perturbation = torch.zeros((args.batch_size, 3, 32, 32))  # freeat's perturbation is not reset between epochs and minibatches
         self.freeat_perturbation = self.freeat_perturbation.to(self.device)
 
+        self.perturbation = torch.zeros((50000, 3, 32, 32))
+        self.weighted_average = torch.zeros((50000, 3, 32, 32))
         self.first_x_adv = []  # to evaluate forget acc
         self.cur_x_adv = []  # to evaluate utilization rate
 
@@ -109,11 +112,19 @@ class AT(object):
         """
         self.model.train()
         train_loss = 0.0
+        cnt = 0
         for indexes, x, y in self.dataset.train:
             x, y = x.to(self.device), y.to(self.device)
-            perturbation = torch.zeros_like(x).uniform_(-self.args.eps, self.args.eps)  # PGD's random initialization
+            # update perturbation initialization by previous
+            perturbation = torch.zeros_like(x).uniform_(-self.args.eps, self.args.eps)  # random initialization
+            for i, idx in enumerate(indexes):
+                if self.perturbation[idx].sum() == 0:
+                    self.perturbation[idx] = perturbation[i]
+                else:
+                    # use last perturbation to update this epoch's initial perturbation
+                    perturbation[i] = self.perturbation[idx]
             # update images
-            for i in range(self.args.K):
+            for _ in range(self.args.K):
                 self.optimizer.zero_grad()
                 x_adv = (x + perturbation).detach().requires_grad_(True)
                 loss = self.loss_fn(self.model(x_adv), y)
@@ -122,6 +133,16 @@ class AT(object):
 
             self.optimizer.zero_grad()
             x_adv = (x + perturbation).detach().requires_grad_(True)
+            # update x_adv use weighted average sum
+            for i, idx in enumerate(indexes):
+                self.perturbation[idx] = perturbation[i]  # save this epoch's final perturbation
+                if self.weighted_average[idx].sum() == 0:  # if the first epoch, directly assign current value
+                    self.weighted_average[idx] = x_adv[i]
+                else:  # not the first epoch, compute the weighted average
+                    # update weighted average
+                    self.weighted_average[idx] = self.args.alpha * self.weighted_average[idx] + (1 - self.args.alpha) * x_adv[i]
+                    # assign to x_adv to train NN
+                    x_adv[i] = self.weighted_average[idx]
 
             # save the first adversarial examples to evaluate forget rate
             if self.epoch == self.start_epoch:
@@ -191,7 +212,7 @@ class AT(object):
     def test(self):
         self.model.eval()
         metrics = EasyDict(total=0, correct=0, correct_adv=0)
-        for x, y in self.dataset.test:
+        for indexes, x, y in self.dataset.test:
             x, y = x.to(self.device), y.to(self.device)
             _, pred = self.model(x).max(1)
             metrics.total += y.shape[0]
@@ -208,6 +229,7 @@ class AT(object):
             x_adv = (x + perturbation).detach().requires_grad_(True)
             _, pred = self.model(x_adv).max(1)
             metrics.correct_adv += torch.eq(pred, y).sum().item()
+
 
         acc = 100.0 * metrics.correct / metrics.total
         adv_acc = 100.0 * metrics.correct_adv / metrics.total
@@ -235,23 +257,6 @@ class AT(object):
                     'epoch': self.epoch,
                 }, "./checkpoint/ckpt.pth")
 
-        # evaluate forget rate
-        metrics_2 = EasyDict(total=0, forget_correct=0, cur_correct=0)
-        for x, y in self.first_x_adv:
-            x, y = x.to(self.device), y.to(self.device)
-            _, pred = self.model(x).max(1)
-            metrics_2.total += y.shape[0]
-            metrics_2.forget_correct += torch.eq(pred, y).sum().item()
-            break  # todo
-        for x, y in self.cur_x_adv:
-            x, y = x.to(self.device), y.to(self.device)
-            _, pred = self.model(x).max(1)
-            metrics_2.cur_correct += torch.eq(pred, y).sum().item()
-            break  # todo
-        forget_acc = 100.0 * metrics_2.forget_correct / metrics_2.total
-        cur_acc = 100.0 * metrics_2.cur_correct / metrics_2.total
-        print("forget acc is {:2f}, cur acc is {:2f}".format(forget_acc, cur_acc))
-
 
 # def adjust_learning_rate(optimizer, epoch):
 #     if epoch <= 60:
@@ -268,12 +273,13 @@ def run():
     parser = argparse.ArgumentParser()
     parser.add_argument('--seed', default=5252520, type=int)
 
+    parser.add_argument("--alpha", "-alpha", default=0.9)
     parser.add_argument('--batch_size', "-bsz", default=128, type=int)
     parser.add_argument('--eps', default=8.0/255, type=float)
     parser.add_argument('--step_size', default=10.0/255, type=float, help="step size to update AE")
     parser.add_argument("--epochs", type=int, default=200, help='iter nums to train NN')
     parser.add_argument("--lr", type=float, default=0.08, help='learning rate')
-    parser.add_argument("--adv_train_method", "-atm", type=str, default="FastAT", choices=["Natural", "VanillaPGD", "FreeAT", "FastAT"], help="adversarial training type")
+    parser.add_argument("--adv_train_method", "-atm", type=str, default="VanillaPGD", choices=["Natural", "VanillaPGD", "FreeAT", "FastAT"], help="adversarial training type")
     parser.add_argument("--resume", '-r', action='store_true', help="resume training from checkpoint")
     parser.add_argument('--K', default=7, type=int)
 
