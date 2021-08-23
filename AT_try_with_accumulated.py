@@ -115,40 +115,52 @@ class AT(object):
         cnt = 0
         for indexes, x, y in self.dataset.train:
             x, y = x.to(self.device), y.to(self.device)
-            # update perturbation initialization by previous
             perturbation = torch.zeros_like(x).uniform_(-self.args.eps, self.args.eps)  # random initialization
-            for i, idx in enumerate(indexes):
-                if self.perturbation[idx].sum() == 0:
-                    self.perturbation[idx] = perturbation[i]
-                else:
-                    # use last perturbation to update this epoch's initial perturbation
-                    perturbation[i] = self.perturbation[idx]
+            # update perturbation initialization by previous
+            if self.args.perturb:
+                for i, idx in enumerate(indexes):
+                    if self.epoch == self.start_epoch:
+                        break
+                    else:
+                        # use last perturbation to update this epoch's initial perturbation
+                        perturbation[i] = self.perturbation[idx]
             # update images
             for _ in range(self.args.K):
                 self.optimizer.zero_grad()
                 x_adv = (x + perturbation).detach().requires_grad_(True)
                 loss = self.loss_fn(self.model(x_adv), y)
                 loss.backward()
-                perturbation = clip_perturbation(perturbation + self.args.step_size * torch.sign(x_adv.grad), self.args.eps)
+                perturbation = clip_perturbation(perturbation + self.args.pgd_step_size * torch.sign(x_adv.grad), self.args.eps)
 
             self.optimizer.zero_grad()
-            x_adv = (x + perturbation).detach().requires_grad_(True)
-            # update x_adv use weighted average sum
-            for i, idx in enumerate(indexes):
-                self.perturbation[idx] = perturbation[i]  # save this epoch's final perturbation
-                if self.weighted_average[idx].sum() == 0:  # if the first epoch, directly assign current value
-                    self.weighted_average[idx] = x_adv[i]
-                else:  # not the first epoch, compute the weighted average
-                    # update weighted average
-                    self.weighted_average[idx] = self.args.alpha * self.weighted_average[idx] + (1 - self.args.alpha) * x_adv[i]
-                    # assign to x_adv to train NN
-                    x_adv[i] = self.weighted_average[idx]
+            x_adv = (x + perturbation).detach()
+            if self.args.was and self.args.perturb:
+                # update x_adv use weighted average sum
+                for i, idx in enumerate(indexes):
+                    self.perturbation[idx] = perturbation[i]  # save this epoch's final perturbation
+                    if self.epoch == self.start_epoch:  # if the first epoch, directly assign current value
+                        self.weighted_average[idx] = x_adv[i]
+                    else:  # not the first epoch, compute the weighted average
+                        # update weighted average
+                        self.weighted_average[idx] = self.args.alpha * self.weighted_average[idx].to(self.device) + (1 - self.args.alpha) * x_adv[i]
+                        # assign to x_adv to train NN
+                        x_adv[i] = self.weighted_average[idx].to(self.device)
+            elif self.args.was:
+                for i, idx in enumerate(indexes):
+                    if self.epoch == self.start_epoch:  # if the first epoch, directly assign current value
+                        self.weighted_average[idx] = x_adv[i]
+                    else:  # not the first epoch, compute the weighted average
+                        self.weighted_average[idx] = self.args.alpha * self.weighted_average[idx].to(self.device) + (1 - self.args.alpha) * x_adv[i]
+                        x_adv[i] = self.weighted_average[idx].to(self.device)
+            elif self.args.perturb:
+                for i, idx in enumerate(indexes):
+                    self.perturbation[idx] = perturbation[i]  # save this epoch's final perturbation
 
             # save the first adversarial examples to evaluate forget rate
-            if self.epoch == self.start_epoch:
-                self.first_x_adv.append((x_adv, y))
-            self.cur_x_adv = []
-            self.cur_x_adv.append((x_adv, y))
+            # if self.epoch == self.start_epoch:
+            #     self.first_x_adv.append((x_adv, y))
+            # self.cur_x_adv = []
+            # self.cur_x_adv.append((x_adv, y))
 
             loss = self.loss_fn(self.model(x_adv), y)
             loss.backward()
@@ -230,7 +242,6 @@ class AT(object):
             _, pred = self.model(x_adv).max(1)
             metrics.correct_adv += torch.eq(pred, y).sum().item()
 
-
         acc = 100.0 * metrics.correct / metrics.total
         adv_acc = 100.0 * metrics.correct_adv / metrics.total
         print("test acc is {:2f}, Adversarial Examples acc is {:2f}".format(acc, adv_acc))
@@ -276,12 +287,16 @@ def run():
     parser.add_argument("--alpha", "-alpha", default=0.9)
     parser.add_argument('--batch_size', "-bsz", default=128, type=int)
     parser.add_argument('--eps', default=8.0/255, type=float)
-    parser.add_argument('--step_size', default=10.0/255, type=float, help="step size to update AE")
+    parser.add_argument('--pgd_step_size', default=2.0/255, type=float, help="step size to update AE")
+    parser.add_argument('--fastat_step_size', default=10.0/255, type=float, help="step size to update AE")
     parser.add_argument("--epochs", type=int, default=200, help='iter nums to train NN')
     parser.add_argument("--lr", type=float, default=0.08, help='learning rate')
     parser.add_argument("--adv_train_method", "-atm", type=str, default="VanillaPGD", choices=["Natural", "VanillaPGD", "FreeAT", "FastAT"], help="adversarial training type")
     parser.add_argument("--resume", '-r', action='store_true', help="resume training from checkpoint")
     parser.add_argument('--K', default=7, type=int)
+
+    parser.add_argument("--perturb", '-ptb', action='store_true', help="use previous perturbation as initialization")
+    parser.add_argument("--was", '-was', action='store_true', help="whether use weighted average sum")
 
     parser.add_argument("--mode", type=int, default=0, choices=[0, 1, 2])
     args = parser.parse_args()

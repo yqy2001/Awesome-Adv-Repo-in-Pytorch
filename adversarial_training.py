@@ -109,6 +109,7 @@ class AT(object):
         """
         self.model.train()
         train_loss = 0.0
+        self.cur_x_adv = []
         for indexes, x, y in self.dataset.train:
             x, y = x.to(self.device), y.to(self.device)
             perturbation = torch.zeros_like(x).uniform_(-self.args.eps, self.args.eps)  # PGD's random initialization
@@ -118,7 +119,7 @@ class AT(object):
                 x_adv = (x + perturbation).detach().requires_grad_(True)
                 loss = self.loss_fn(self.model(x_adv), y)
                 loss.backward()
-                perturbation = clip_perturbation(perturbation + self.args.step_size * torch.sign(x_adv.grad), self.args.eps)
+                perturbation = clip_perturbation(perturbation + self.args.pgd_step_size * torch.sign(x_adv.grad), self.args.eps)
 
             self.optimizer.zero_grad()
             x_adv = (x + perturbation).detach().requires_grad_(True)
@@ -126,7 +127,6 @@ class AT(object):
             # save the first adversarial examples to evaluate forget rate
             if self.epoch == self.start_epoch:
                 self.first_x_adv.append((x_adv, y))
-            self.cur_x_adv = []
             self.cur_x_adv.append((x_adv, y))
 
             loss = self.loss_fn(self.model(x_adv), y)
@@ -191,7 +191,7 @@ class AT(object):
     def test(self):
         self.model.eval()
         metrics = EasyDict(total=0, correct=0, correct_adv=0)
-        for x, y in self.dataset.test:
+        for indexes, x, y in self.dataset.test:
             x, y = x.to(self.device), y.to(self.device)
             _, pred = self.model(x).max(1)
             metrics.total += y.shape[0]
@@ -242,12 +242,10 @@ class AT(object):
             _, pred = self.model(x).max(1)
             metrics_2.total += y.shape[0]
             metrics_2.forget_correct += torch.eq(pred, y).sum().item()
-            break  # todo
         for x, y in self.cur_x_adv:
             x, y = x.to(self.device), y.to(self.device)
             _, pred = self.model(x).max(1)
             metrics_2.cur_correct += torch.eq(pred, y).sum().item()
-            break  # todo
         forget_acc = 100.0 * metrics_2.forget_correct / metrics_2.total
         cur_acc = 100.0 * metrics_2.cur_correct / metrics_2.total
         print("forget acc is {:2f}, cur acc is {:2f}".format(forget_acc, cur_acc))
@@ -270,10 +268,11 @@ def run():
 
     parser.add_argument('--batch_size', "-bsz", default=128, type=int)
     parser.add_argument('--eps', default=8.0/255, type=float)
-    parser.add_argument('--step_size', default=10.0/255, type=float, help="step size to update AE")
+    parser.add_argument('--pgd_step_size', default=2.0/255, type=float, help="step size to update AE")
+    parser.add_argument('--fastat_step_size', default=10.0 / 255, type=float, help="step size to update AE")
     parser.add_argument("--epochs", type=int, default=200, help='iter nums to train NN')
     parser.add_argument("--lr", type=float, default=0.08, help='learning rate')
-    parser.add_argument("--adv_train_method", "-atm", type=str, default="FastAT", choices=["Natural", "VanillaPGD", "FreeAT", "FastAT"], help="adversarial training type")
+    parser.add_argument("--adv_train_method", "-atm", type=str, default="VanillaPGD", choices=["Natural", "VanillaPGD", "FreeAT", "FastAT"], help="adversarial training type")
     parser.add_argument("--resume", '-r', action='store_true', help="resume training from checkpoint")
     parser.add_argument('--K', default=7, type=int)
 
