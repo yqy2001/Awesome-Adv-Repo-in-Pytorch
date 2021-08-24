@@ -1,0 +1,9 @@
+Files already downloaded and verified
+Files already downloaded and verified
+
+Epoch: 1/200
+train loss is 904.125370
+test acc is 35.920000, Adversarial Examples acc is 29.970000
+This epoch's AE acc is better, Saving...
+
+Epoch: 2/200

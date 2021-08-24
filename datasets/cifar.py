@@ -3,6 +3,9 @@
 @StartTime:     2021/8/4 18:51
 @Filename:      cifar.py
 """
+import random
+
+import numpy
 import torch
 import torchvision
 import torchvision.transforms as transforms
@@ -34,6 +37,12 @@ def load_cifar10(bsz, mode=0):
     Load training and test data of cifar10
     each image is [3, 32, 32]
     """
+    def seed_worker(worker_id):
+        worker_seed = torch.initial_seed() % 2 ** 32
+        numpy.random.seed(worker_seed)
+        random.seed(worker_seed)
+    g = torch.Generator()
+    g.manual_seed(0)
 
     if mode == 0:
         train_transforms = transforms.Compose([
@@ -74,10 +83,10 @@ def load_cifar10(bsz, mode=0):
         root=_DATA_cifar10, train=False, transform=test_transforms, download=True
     )
     train_loader = torch.utils.data.DataLoader(
-        train_dataset, batch_size=bsz, shuffle=True, num_workers=2
+        train_dataset, batch_size=bsz, shuffle=True, num_workers=2, worker_init_fn=seed_worker, generator=g
     )
     test_loader = torch.utils.data.DataLoader(
-        test_dataset, batch_size=bsz, shuffle=False, num_workers=2
+        test_dataset, batch_size=bsz, shuffle=False, num_workers=2, worker_init_fn=seed_worker, generator=g
     )
     return EasyDict(train=train_loader, test=test_loader)
 

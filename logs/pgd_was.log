@@ -1,0 +1,205 @@
+Files already downloaded and verified
+Files already downloaded and verified
+
+Epoch: 1/200
+train loss is 929.432495
+test acc is 31.890000, Adversarial Examples acc is 27.120000
+This epoch's AE acc is better, Saving...
+
+Epoch: 2/200
+train loss is 637.906795
+test acc is 43.860000, Adversarial Examples acc is 28.030000
+This epoch's AE acc is better, Saving...
+
+Epoch: 3/200
+train loss is 519.993733
+test acc is 58.740000, Adversarial Examples acc is 36.990000
+This epoch's AE acc is better, Saving...
+
+Epoch: 4/200
+train loss is 431.979179
+test acc is 62.600000, Adversarial Examples acc is 33.190000
+
+Epoch: 5/200
+train loss is 373.216587
+test acc is 69.810000, Adversarial Examples acc is 37.640000
+This epoch's AE acc is better, Saving...
+This epoch's training time is 1289.686588 s
+
+Epoch: 6/200
+train loss is 326.285930
+test acc is 74.770000, Adversarial Examples acc is 43.060000
+This epoch's AE acc is better, Saving...
+
+Epoch: 7/200
+train loss is 289.534838
+test acc is 72.800000, Adversarial Examples acc is 42.930000
+
+Epoch: 8/200
+train loss is 263.133425
+test acc is 74.450000, Adversarial Examples acc is 42.780000
+
+Epoch: 9/200
+train loss is 254.658253
+test acc is 78.320000, Adversarial Examples acc is 46.570000
+This epoch's AE acc is better, Saving...
+
+Epoch: 10/200
+train loss is 238.521635
+test acc is 78.470000, Adversarial Examples acc is 47.070000
+This epoch's AE acc is better, Saving...
+This epoch's training time is 1290.979146 s
+VanillaPGD training time is 203.078484 min
+
+Epoch: 11/200
+train loss is 218.348681
+test acc is 79.950000, Adversarial Examples acc is 49.730000
+This epoch's AE acc is better, Saving...
+
+Epoch: 12/200
+train loss is 207.541524
+test acc is 78.330000, Adversarial Examples acc is 47.010000
+
+Epoch: 13/200
+train loss is 202.140628
+test acc is 81.320000, Adversarial Examples acc is 48.130000
+
+Epoch: 14/200
+train loss is 192.431087
+test acc is 80.030000, Adversarial Examples acc is 49.940000
+This epoch's AE acc is better, Saving...
+
+Epoch: 15/200
+train loss is 184.573960
+test acc is 79.520000, Adversarial Examples acc is 49.790000
+This epoch's training time is 1292.392858 s
+
+Epoch: 16/200
+train loss is 178.373803
+test acc is 81.270000, Adversarial Examples acc is 49.120000
+
+Epoch: 17/200
+train loss is 171.913127
+test acc is 78.150000, Adversarial Examples acc is 45.870000
+
+Epoch: 18/200
+train loss is 165.759037
+test acc is 81.040000, Adversarial Examples acc is 47.230000
+
+Epoch: 19/200
+train loss is 162.342892
+test acc is 77.420000, Adversarial Examples acc is 47.100000
+
+Epoch: 20/200
+train loss is 158.600216
+test acc is 79.650000, Adversarial Examples acc is 49.580000
+This epoch's training time is 1289.893118 s
+VanillaPGD training time is 416.696403 min
+
+Epoch: 21/200
+train loss is 152.566695
+test acc is 79.690000, Adversarial Examples acc is 50.550000
+This epoch's AE acc is better, Saving...
+
+Epoch: 22/200
+train loss is 148.978424
+test acc is 82.560000, Adversarial Examples acc is 51.060000
+This epoch's AE acc is better, Saving...
+
+Epoch: 23/200
+train loss is 144.982338
+test acc is 80.370000, Adversarial Examples acc is 48.340000
+
+Epoch: 24/200
+train loss is 141.712251
+test acc is 78.930000, Adversarial Examples acc is 46.570000
+
+Epoch: 25/200
+train loss is 137.317869
+test acc is 80.410000, Adversarial Examples acc is 48.620000
+This epoch's training time is 1288.434994 s
+
+Epoch: 26/200
+train loss is 136.865336
+test acc is 82.040000, Adversarial Examples acc is 47.360000
+
+Epoch: 27/200
+train loss is 130.688686
+test acc is 79.210000, Adversarial Examples acc is 46.360000
+
+Epoch: 28/200
+train loss is 131.922295
+test acc is 80.650000, Adversarial Examples acc is 49.930000
+
+Epoch: 29/200
+train loss is 127.353584
+test acc is 82.110000, Adversarial Examples acc is 48.220000
+
+Epoch: 30/200
+train loss is 131.303046
+test acc is 82.320000, Adversarial Examples acc is 50.890000
+This epoch's training time is 1288.012649 s
+VanillaPGD training time is 630.116093 min
+
+Epoch: 31/200
+train loss is 122.490397
+test acc is 82.730000, Adversarial Examples acc is 49.890000
+
+Epoch: 32/200
+train loss is 124.914100
+test acc is 83.140000, Adversarial Examples acc is 50.050000
+
+Epoch: 33/200
+train loss is 115.971214
+test acc is 81.480000, Adversarial Examples acc is 47.060000
+
+Epoch: 34/200
+train loss is 117.141084
+test acc is 82.770000, Adversarial Examples acc is 51.670000
+This epoch's AE acc is better, Saving...
+
+Epoch: 35/200
+train loss is 118.985084
+test acc is 81.350000, Adversarial Examples acc is 48.970000
+This epoch's training time is 1288.562483 s
+
+Epoch: 36/200
+train loss is 118.404000
+test acc is 80.960000, Adversarial Examples acc is 48.360000
+
+Epoch: 37/200
+train loss is 115.932500
+test acc is 82.770000, Adversarial Examples acc is 50.990000
+
+Epoch: 38/200
+train loss is 112.899952
+test acc is 81.390000, Adversarial Examples acc is 48.960000
+
+Epoch: 39/200
+train loss is 111.031056
+test acc is 81.870000, Adversarial Examples acc is 48.430000
+
+Epoch: 40/200
+train loss is 111.391053
+test acc is 82.150000, Adversarial Examples acc is 49.110000
+This epoch's training time is 1290.984934 s
+VanillaPGD training time is 843.766365 min
+
+Epoch: 41/200
+train loss is 111.250553
+test acc is 82.640000, Adversarial Examples acc is 48.670000
+
+Epoch: 42/200
+train loss is 108.183535
+test acc is 81.890000, Adversarial Examples acc is 48.520000
+
+Epoch: 43/200
+train loss is 109.498228
+test acc is 82.720000, Adversarial Examples acc is 50.510000
+
+Epoch: 44/200
+train loss is 109.587113
+test acc is 81.730000, Adversarial Examples acc is 47.270000
+
+Epoch: 45/200
+train loss is 109.285812

@@ -36,7 +36,7 @@ class AT(object):
             self.model = torch.nn.DataParallel(self.model)
 
         self.loss_fn = torch.nn.CrossEntropyLoss()
-        self.optimizer = torch.optim.SGD(self.model.parameters(), lr=args.lr, momentum=0.9, weight_decay=5e-4)
+        self.optimizer = torch.optim.SGD(self.model.parameters(), lr=args.lr, momentum=0.9, weight_decay=2e-4)
 
         self.args = args
         self.dataset = dataset
@@ -179,9 +179,18 @@ class AT(object):
         """
         self.model.train()
         train_loss = 0.0
-        for x, y in self.dataset.train:
+        for indexes, x, y in self.dataset.train:
             x, y = x.to(self.device), y.to(self.device)
             # todo maybe different perturbations for different minibatches
+            # update perturbation initialization by previous
+            if self.args.perturb:
+                for i, idx in enumerate(indexes):
+                    if self.epoch == self.start_epoch:
+                        break
+                    else:
+                        # use last perturbation to update this epoch's initial perturbation
+                        self.freeat_perturbation[i] = self.perturbation[idx]
+
             for i in range(self.args.K):
                 self.optimizer.zero_grad()
                 x_adv = (x + self.freeat_perturbation[0:x.shape[0]]).detach().requires_grad_(True)
@@ -192,6 +201,10 @@ class AT(object):
                 self.freeat_perturbation[0:x.shape[0]] = clip_perturbation(self.freeat_perturbation[0:x.shape[0]] + self.args.eps * torch.sign(x_adv.grad), self.args.eps)
 
                 train_loss += loss.item()
+
+            if self.args.perturb:  # save this epoch's perturbation
+                for i, idx in enumerate(indexes):
+                    self.perturbation[idx] = self.freeat_perturbation[i]
 
         print("train loss is {:2f}".format(train_loss))
 
@@ -290,7 +303,7 @@ def run():
     parser.add_argument('--pgd_step_size', default=2.0/255, type=float, help="step size to update AE")
     parser.add_argument('--fastat_step_size', default=10.0/255, type=float, help="step size to update AE")
     parser.add_argument("--epochs", type=int, default=200, help='iter nums to train NN')
-    parser.add_argument("--lr", type=float, default=0.08, help='learning rate')
+    parser.add_argument("--lr", "-lr", type=float, default=0.1, help='learning rate')
     parser.add_argument("--adv_train_method", "-atm", type=str, default="VanillaPGD", choices=["Natural", "VanillaPGD", "FreeAT", "FastAT"], help="adversarial training type")
     parser.add_argument("--resume", '-r', action='store_true', help="resume training from checkpoint")
     parser.add_argument('--K', default=7, type=int)
@@ -307,6 +320,7 @@ def run():
     torch.manual_seed(seed)
     torch.cuda.manual_seed(seed)
     np.random.seed(seed)
+    # torch.backends.cudnn.benchmark = False
 
     cifar10 = load_cifar10(args.batch_size, args.mode)
     model = ResNet50()

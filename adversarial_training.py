@@ -146,7 +146,8 @@ class AT(object):
         """
         self.model.train()
         train_loss = 0.0
-        for x, y in self.dataset.train:
+        self.cur_x_adv = []
+        for indexes, x, y in self.dataset.train:
             x, y = x.to(self.device), y.to(self.device)
             # todo maybe different perturbations for different minibatches
             for i in range(self.args.K):
@@ -159,6 +160,11 @@ class AT(object):
                 self.freeat_perturbation[0:x.shape[0]] = clip_perturbation(self.freeat_perturbation[0:x.shape[0]] + self.args.eps * torch.sign(x_adv.grad), self.args.eps)
 
                 train_loss += loss.item()
+
+            # save the first adversarial examples to evaluate forget rate
+            if self.epoch == self.start_epoch:
+                self.first_x_adv.append((x_adv, y))
+            self.cur_x_adv.append((x_adv, y))
 
         print("train loss is {:2f}".format(train_loss))
 
