@@ -1,0 +1,34 @@
+epoch: 1/30, train loss: 1085.231, train cost 74.54 s
+epoch: 2/30, train loss: 1081.394, train cost 72.47 s
+epoch: 3/30, train loss: 1077.738, train cost 73.27 s
+epoch: 4/30, train loss: 1078.641, train cost 72.47 s
+epoch: 5/30, train loss: 1077.598, train cost 73.02 s
+epoch: 6/30, train loss: 1074.989, train cost 72.69 s
+epoch: 7/30, train loss: 1068.765, train cost 72.52 s
+epoch: 8/30, train loss: 568.675, train cost 72.55 s
+epoch: 9/30, train loss: 50.145, train cost 72.96 s
+epoch: 10/30, train loss: 34.313, train cost 73.21 s
+epoch: 11/30, train loss: 24.961, train cost 73.06 s
+epoch: 12/30, train loss: 18.699, train cost 73.02 s
+epoch: 13/30, train loss: 15.876, train cost 72.75 s
+epoch: 14/30, train loss: 13.304, train cost 72.82 s
+epoch: 15/30, train loss: 12.499, train cost 72.69 s
+epoch: 16/30, train loss: 10.020, train cost 67.92 s
+epoch: 17/30, train loss: 9.513, train cost 67.85 s
+epoch: 18/30, train loss: 6.724, train cost 68.02 s
+epoch: 19/30, train loss: 8.379, train cost 73.22 s
+epoch: 20/30, train loss: 5.935, train cost 73.13 s
+epoch: 21/30, train loss: 5.437, train cost 72.98 s
+epoch: 22/30, train loss: 5.197, train cost 72.64 s
+epoch: 23/30, train loss: 3.710, train cost 72.92 s
+epoch: 24/30, train loss: 5.228, train cost 72.51 s
+epoch: 25/30, train loss: 5.132, train cost 72.62 s
+epoch: 26/30, train loss: 3.221, train cost 73.01 s
+epoch: 27/30, train loss: 4.257, train cost 72.97 s
+epoch: 28/30, train loss: 3.262, train cost 72.76 s
+epoch: 29/30, train loss: 3.313, train cost 73.37 s
+epoch: 30/30, train loss: 2.883, train cost 72.75 s
+total cost 2172.69 s
+test acc on clean examples (%): 98.500000
+test acc on fgm examples (%): 9.810000
+test acc on pgd examples (%): 14.430000

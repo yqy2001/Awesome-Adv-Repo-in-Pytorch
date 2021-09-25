@@ -1,8 +1,3 @@
-"""
-@Author:        禹棋赢
-@StartTime:     2021/8/2 19:37
-@Filename:      adversarial attack.py
-"""
 import argparse
 
 import torch
@@ -13,17 +8,29 @@ from easydict import EasyDict
 from attacks.FGM import fast_gradient_method
 from attacks.PGD import projected_gradient_descent
 from datasets.mnist import load_mnist
-from networks.CNN import CNN
-from networks.CNN_reverse import CNN_reverse
+from networks.Kervolution import Ker_ResNet18, Ker_ResNet34
+from networks.resnet import ResNet18, ResNet34, ResNet50, ResNet101, ResNet152
 
+import time
+from functools import partial
 
 def train_attack():
     data = load_mnist()  # Load train and test data
+    if args.model=='resnet18':
+        model = ResNet18()
+    elif args.model=='resnet34':
+        model = ResNet34()
+    elif args.model=='resnet50':
+        model = ResNet50()
+    elif args.model=='resnet101':
+        model = ResNet101()
+    elif args.model=='resnet152':
+        model = ResNet152()
+    elif args.model=='ker_resnet18':
+        model = Ker_ResNet18()
+    elif args.model=='ker_resnet34':
+        model = Ker_ResNet34()
 
-    if args.model == "CNN":
-        model = CNN(in_channels=1)  # mnist数据集通道数为1
-    elif args.model == "CNN_R":
-        model = CNN_reverse(in_channels=1)  # mnist数据集通道数为1
     loss_fn = nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
 
@@ -32,8 +39,10 @@ def train_attack():
         model = model.cuda()
 
     model.train()  # train mode
+    ticks0 = time.time()
     for epoch in range(1, args.epoch+1):
         train_loss = 0.0
+        ticks = time.time()
         for x, y in tqdm(data.train):
             x, y = x.to(device), y.to(device)
             
@@ -44,9 +53,11 @@ def train_attack():
             loss.backward()
             optimizer.step()
             train_loss += loss.item()
-
-        print("epoch: {}/{}, train loss: {:.3f}".format(epoch, args.epoch, train_loss))
-
+        tocks = time.time()
+        print("epoch: {}/{}, train loss: {:.3f}, train cost {:.2f} s".format(epoch, args.epoch, train_loss, tocks-ticks))
+    tocks0 = time.time()
+    print("total cost {:.2f} s".format(tocks0-ticks0))
+    
     model.eval()
     metrics = EasyDict(correct=0, correct_fgm=0, total=0, correct_pgd=0)
     for x, y in data.test:
@@ -74,7 +85,7 @@ if __name__ == '__main__':
     parser.add_argument("--iter", type=int, default=40, help='iter nums to update AE, K in PGD-K')
     parser.add_argument("--lr", type=float, default=0.01, help='learning rate of iterative attack method')
     parser.add_argument("--atm", type=str, default="pgd", help="which attack method to use")
-    parser.add_argument("--model", type=str, default="CNN_R", help="which attack method to use")
+    parser.add_argument("--model", type=str, default='resnet18',choices=["resnet18", "resnet34", "resnet50", "resnet101", "resnet152", "ker_resnet18", "ker_resnet34"],help="choose a model")
     args = parser.parse_args()
 
     train_attack()
