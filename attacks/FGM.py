@@ -21,7 +21,8 @@ def fast_gradient_method(model_fn, loss_fn, x, y, eps, norm="inf"):
     # x needs to be a leaf variable, of floating point type and have requires_grad being True for
     # its grad to be computed and stored properly in a backward call
     x = x.clone().detach().to(torch.float).requires_grad_(True)
-    loss = loss_fn(model_fn(x), y)
+    data, _ = model_fn(x)
+    loss = loss_fn(data, y)
     loss.backward()  # backward and compute gradients
     adv_x = x + eps * torch.sign(x.grad)
     return adv_x

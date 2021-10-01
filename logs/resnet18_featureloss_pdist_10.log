@@ -1,0 +1,14 @@
+epoch: 1/10, train loss: 48.377, acc_loss: 23.357,feature_loss:31.276, train cost 64.08 s
+epoch: 2/10, train loss: 16.669, acc_loss: 4.895,feature_loss:14.717, train cost 61.20 s
+epoch: 3/10, train loss: 13.424, acc_loss: 4.288,feature_loss:11.420, train cost 64.96 s
+epoch: 4/10, train loss: 10.238, acc_loss: 3.776,feature_loss:8.077, train cost 62.93 s
+epoch: 5/10, train loss: 8.329, acc_loss: 3.141,feature_loss:6.485, train cost 64.90 s
+epoch: 6/10, train loss: 7.302, acc_loss: 2.899,feature_loss:5.504, train cost 64.11 s
+epoch: 7/10, train loss: 6.200, acc_loss: 2.606,feature_loss:4.492, train cost 62.77 s
+epoch: 8/10, train loss: 5.831, acc_loss: 2.578,feature_loss:4.066, train cost 64.57 s
+epoch: 9/10, train loss: 5.228, acc_loss: 2.292,feature_loss:3.670, train cost 62.93 s
+epoch: 10/10, train loss: 4.543, acc_loss: 1.948,feature_loss:3.244, train cost 62.56 s
+total cost 635.02 s
+test acc on clean examples (%): 99.420000
+test acc on fgm examples (%): 30.430000
+test acc on pgd examples (%): 0.520000

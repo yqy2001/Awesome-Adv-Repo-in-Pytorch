@@ -1,0 +1,34 @@
+epoch: 1/30, train loss: 44.702, acc_loss: 20.522,feature_loss:30.225, train cost 67.70 s
+epoch: 2/30, train loss: 16.471, acc_loss: 5.344,feature_loss:13.910, train cost 64.95 s
+epoch: 3/30, train loss: 11.728, acc_loss: 4.137,feature_loss:9.488, train cost 62.72 s
+epoch: 4/30, train loss: 10.120, acc_loss: 3.793,feature_loss:7.909, train cost 63.21 s
+epoch: 5/30, train loss: 7.550, acc_loss: 3.039,feature_loss:5.638, train cost 63.23 s
+epoch: 6/30, train loss: 7.722, acc_loss: 3.085,feature_loss:5.796, train cost 64.20 s
+epoch: 7/30, train loss: 6.396, acc_loss: 2.740,feature_loss:4.570, train cost 63.65 s
+epoch: 8/30, train loss: 5.746, acc_loss: 2.397,feature_loss:4.186, train cost 61.41 s
+epoch: 9/30, train loss: 4.973, acc_loss: 2.163,feature_loss:3.513, train cost 62.98 s
+epoch: 10/30, train loss: 5.068, acc_loss: 2.115,feature_loss:3.691, train cost 62.04 s
+epoch: 11/30, train loss: 4.429, acc_loss: 1.787,feature_loss:3.303, train cost 63.45 s
+epoch: 12/30, train loss: 3.978, acc_loss: 1.792,feature_loss:2.733, train cost 64.09 s
+epoch: 13/30, train loss: 3.342, acc_loss: 1.523,feature_loss:2.274, train cost 60.73 s
+epoch: 14/30, train loss: 4.321, acc_loss: 1.863,feature_loss:3.072, train cost 64.06 s
+epoch: 15/30, train loss: 4.075, acc_loss: 1.910,feature_loss:2.705, train cost 63.90 s
+epoch: 16/30, train loss: 3.550, acc_loss: 1.546,feature_loss:2.504, train cost 62.85 s
+epoch: 17/30, train loss: 2.873, acc_loss: 1.187,feature_loss:2.107, train cost 62.74 s
+epoch: 18/30, train loss: 1.922, acc_loss: 0.758,feature_loss:1.455, train cost 61.62 s
+epoch: 19/30, train loss: 2.291, acc_loss: 0.966,feature_loss:1.657, train cost 63.87 s
+epoch: 20/30, train loss: 4.160, acc_loss: 2.135,feature_loss:2.532, train cost 63.84 s
+epoch: 21/30, train loss: 2.306, acc_loss: 0.958,feature_loss:1.684, train cost 62.49 s
+epoch: 22/30, train loss: 2.282, acc_loss: 1.013,feature_loss:1.587, train cost 63.99 s
+epoch: 23/30, train loss: 2.649, acc_loss: 1.282,feature_loss:1.708, train cost 61.56 s
+epoch: 24/30, train loss: 1.887, acc_loss: 0.722,feature_loss:1.457, train cost 63.46 s
+epoch: 25/30, train loss: 1.986, acc_loss: 0.925,feature_loss:1.326, train cost 64.46 s
+epoch: 26/30, train loss: 1.931, acc_loss: 0.803,feature_loss:1.410, train cost 61.97 s
+epoch: 27/30, train loss: 1.674, acc_loss: 0.754,feature_loss:1.150, train cost 64.54 s
+epoch: 28/30, train loss: 2.187, acc_loss: 1.070,feature_loss:1.397, train cost 62.44 s
+epoch: 29/30, train loss: 2.340, acc_loss: 1.268,feature_loss:1.340, train cost 64.34 s
+epoch: 30/30, train loss: 3.423, acc_loss: 1.604,feature_loss:2.273, train cost 64.79 s
+total cost 1901.29 s
+test acc on clean examples (%): 99.070000
+test acc on fgm examples (%): 40.760000
+test acc on pgd examples (%): 0.070000

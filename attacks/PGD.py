@@ -31,7 +31,8 @@ def projected_gradient_descent(model_fn, loss_fn, x, y, eps, nb_iter, lr, random
 
     for i in range(nb_iter):
         x_adv = x_adv.clone().detach().to(torch.float).requires_grad_(True)  # 对x求梯度
-        loss = loss_fn(model_fn(x_adv), y)
+        data, _ = model_fn(x_adv)
+        loss = loss_fn(data, y)
         loss.backward()
         perturbation = lr * torch.sign(x_adv.grad)
         perturbation = clip_perturbation(perturbation, eps)
