@@ -120,8 +120,12 @@ epoch: 30/30, train loss: 3.765, acc_loss: 1.219,feature_loss:1.273, train cost 
 test acc on clean examples (%): 99.570000
 test acc on fgm examples (%): 46.670000
 test acc on pgd examples (%): 4.200000
-train feature scatter diagram save dir:figures/train_Feature_eps30.jpg
-test feature scatter diagram save dir:figures/test_Feature_eps30.jpg
+train feature scatter diagram save dir:figures/train_Feature_eps40.jpg
+test feature scatter diagram save dir:figures/test_Feature_eps40.jpg
 Feature get!
 generating t-SNE plot...
 done!
+Feature get!
+generating t-SNE plot...
+done!
+total cost 2770.41 s

@@ -1,0 +1,131 @@
+epoch:30  eps to constrain AE:0.3  iter nums to update AE:10  learning rate of iterative attack method:0.01
+atm:pgd  lambd(ratio of Feature loss to SCE loss):2  model:resnet34
+epoch: 1/30, train loss: 161.285, acc_loss: 81.547,feature_loss:39.869, train cost 68.66 s
+test acc on clean examples (%): 76.970000
+test acc on fgm examples (%): 20.340000
+test acc on pgd examples (%): 20.690000
+epoch: 2/30, train loss: 43.644, acc_loss: 14.467,feature_loss:14.588, train cost 69.42 s
+test acc on clean examples (%): 97.190000
+test acc on fgm examples (%): 19.450000
+test acc on pgd examples (%): 15.830000
+epoch: 3/30, train loss: 27.625, acc_loss: 10.010,feature_loss:8.808, train cost 69.93 s
+test acc on clean examples (%): 98.300000
+test acc on fgm examples (%): 20.400000
+test acc on pgd examples (%): 8.320000
+epoch: 4/30, train loss: 26.385, acc_loss: 9.369,feature_loss:8.508, train cost 68.53 s
+test acc on clean examples (%): 94.560000
+test acc on fgm examples (%): 10.730000
+test acc on pgd examples (%): 7.360000
+epoch: 5/30, train loss: 23.936, acc_loss: 8.927,feature_loss:7.505, train cost 68.08 s
+test acc on clean examples (%): 96.870000
+test acc on fgm examples (%): 16.990000
+test acc on pgd examples (%): 3.770000
+epoch: 6/30, train loss: 18.210, acc_loss: 7.105,feature_loss:5.552, train cost 68.25 s
+test acc on clean examples (%): 89.810000
+test acc on fgm examples (%): 11.520000
+test acc on pgd examples (%): 8.130000
+epoch: 7/30, train loss: 17.401, acc_loss: 7.027,feature_loss:5.187, train cost 68.47 s
+test acc on clean examples (%): 99.190000
+test acc on fgm examples (%): 24.780000
+test acc on pgd examples (%): 7.540000
+epoch: 8/30, train loss: 20.932, acc_loss: 8.220,feature_loss:6.356, train cost 68.00 s
+test acc on clean examples (%): 99.150000
+test acc on fgm examples (%): 26.890000
+test acc on pgd examples (%): 15.350000
+epoch: 9/30, train loss: 20.169, acc_loss: 7.763,feature_loss:6.203, train cost 69.86 s
+test acc on clean examples (%): 98.730000
+test acc on fgm examples (%): 24.700000
+test acc on pgd examples (%): 14.790000
+epoch: 10/30, train loss: 11.849, acc_loss: 5.261,feature_loss:3.294, train cost 67.84 s
+test acc on clean examples (%): 98.650000
+test acc on fgm examples (%): 38.200000
+test acc on pgd examples (%): 8.540000
+epoch: 11/30, train loss: 11.062, acc_loss: 4.945,feature_loss:3.059, train cost 68.69 s
+test acc on clean examples (%): 98.460000
+test acc on fgm examples (%): 21.620000
+test acc on pgd examples (%): 4.070000
+epoch: 12/30, train loss: 17.554, acc_loss: 7.211,feature_loss:5.172, train cost 69.12 s
+test acc on clean examples (%): 99.040000
+test acc on fgm examples (%): 25.760000
+test acc on pgd examples (%): 2.760000
+epoch: 13/30, train loss: 15.476, acc_loss: 6.181,feature_loss:4.648, train cost 70.52 s
+test acc on clean examples (%): 99.080000
+test acc on fgm examples (%): 40.130000
+test acc on pgd examples (%): 12.580000
+epoch: 14/30, train loss: 11.041, acc_loss: 4.497,feature_loss:3.272, train cost 67.98 s
+test acc on clean examples (%): 99.300000
+test acc on fgm examples (%): 21.500000
+test acc on pgd examples (%): 4.620000
+epoch: 15/30, train loss: 9.648, acc_loss: 3.885,feature_loss:2.881, train cost 67.94 s
+test acc on clean examples (%): 98.520000
+test acc on fgm examples (%): 20.370000
+test acc on pgd examples (%): 2.870000
+epoch: 16/30, train loss: 12.791, acc_loss: 5.332,feature_loss:3.729, train cost 67.97 s
+test acc on clean examples (%): 99.070000
+test acc on fgm examples (%): 32.670000
+test acc on pgd examples (%): 3.190000
+epoch: 17/30, train loss: 9.550, acc_loss: 4.399,feature_loss:2.576, train cost 70.72 s
+test acc on clean examples (%): 99.170000
+test acc on fgm examples (%): 18.360000
+test acc on pgd examples (%): 6.600000
+epoch: 18/30, train loss: 10.692, acc_loss: 4.588,feature_loss:3.052, train cost 72.70 s
+test acc on clean examples (%): 99.420000
+test acc on fgm examples (%): 37.130000
+test acc on pgd examples (%): 4.020000
+epoch: 19/30, train loss: 6.300, acc_loss: 2.851,feature_loss:1.724, train cost 73.06 s
+test acc on clean examples (%): 99.410000
+test acc on fgm examples (%): 31.450000
+test acc on pgd examples (%): 5.820000
+epoch: 20/30, train loss: 9.167, acc_loss: 4.071,feature_loss:2.548, train cost 71.33 s
+test acc on clean examples (%): 99.280000
+test acc on fgm examples (%): 44.140000
+test acc on pgd examples (%): 16.980000
+epoch: 21/30, train loss: 10.029, acc_loss: 4.645,feature_loss:2.692, train cost 66.25 s
+test acc on clean examples (%): 95.930000
+test acc on fgm examples (%): 15.990000
+test acc on pgd examples (%): 1.190000
+epoch: 22/30, train loss: 9.410, acc_loss: 4.605,feature_loss:2.403, train cost 69.49 s
+test acc on clean examples (%): 99.210000
+test acc on fgm examples (%): 14.840000
+test acc on pgd examples (%): 3.280000
+epoch: 23/30, train loss: 8.372, acc_loss: 3.739,feature_loss:2.317, train cost 73.81 s
+test acc on clean examples (%): 99.460000
+test acc on fgm examples (%): 35.860000
+test acc on pgd examples (%): 6.020000
+epoch: 24/30, train loss: 8.429, acc_loss: 3.668,feature_loss:2.381, train cost 72.85 s
+test acc on clean examples (%): 98.900000
+test acc on fgm examples (%): 21.810000
+test acc on pgd examples (%): 4.510000
+epoch: 25/30, train loss: 7.091, acc_loss: 3.284,feature_loss:1.903, train cost 70.07 s
+test acc on clean examples (%): 99.450000
+test acc on fgm examples (%): 28.220000
+test acc on pgd examples (%): 7.890000
+epoch: 26/30, train loss: 5.289, acc_loss: 2.546,feature_loss:1.372, train cost 72.84 s
+test acc on clean examples (%): 99.160000
+test acc on fgm examples (%): 34.390000
+test acc on pgd examples (%): 16.390000
+epoch: 27/30, train loss: 5.522, acc_loss: 2.349,feature_loss:1.587, train cost 72.29 s
+test acc on clean examples (%): 99.030000
+test acc on fgm examples (%): 36.880000
+test acc on pgd examples (%): 5.200000
+epoch: 28/30, train loss: 5.519, acc_loss: 2.565,feature_loss:1.477, train cost 72.71 s
+test acc on clean examples (%): 99.520000
+test acc on fgm examples (%): 39.740000
+test acc on pgd examples (%): 9.880000
+epoch: 29/30, train loss: 6.598, acc_loss: 2.407,feature_loss:2.095, train cost 71.47 s
+test acc on clean examples (%): 99.530000
+test acc on fgm examples (%): 34.540000
+test acc on pgd examples (%): 4.520000
+epoch: 30/30, train loss: 5.238, acc_loss: 2.432,feature_loss:1.403, train cost 73.60 s
+test acc on clean examples (%): 98.860000
+test acc on fgm examples (%): 25.070000
+test acc on pgd examples (%): 12.680000
+train feature scatter diagram save dir:figures/res34_train_Feature_eps30.jpg
+test feature scatter diagram save dir:figures/res34_test_Feature_eps30.jpg
+Feature get!
+generating t-SNE plot...
+done!
+Feature get!
+generating t-SNE plot...
+done!
+total cost 3094.66 s
