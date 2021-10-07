@@ -8,13 +8,14 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 
+
 def gen_features(net, device, dataloader):
     net.eval()
     targets_list = []
     outputs_list = []
 
     with torch.no_grad():
-        for inputs, targets in tqdm(dataloader):
+        for _, inputs, targets in tqdm(dataloader):
             inputs = inputs.to(device)
             targets = targets.to(device)
             targets_np = targets.cuda().data.cpu().numpy()
@@ -29,6 +30,7 @@ def gen_features(net, device, dataloader):
     features = np.concatenate(outputs_list, axis=0).astype(np.float64)
 
     return targets, features
+
 
 def tsne_plot(save_dir, targets, outputs):
     print('generating t-SNE plot...')

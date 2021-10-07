@@ -43,19 +43,26 @@ def train_attack():
         model = model.cuda()
 
     ticks0 = time.time()
+
+    best = EasyDict(acc=0, fgm_acc=0, pgd_acc=0)
     for epoch in range(1, args.epoch + 1):
         train_loss = 0.0
         ticks = time.time()
         model.train()  # train mode
 
-        # feature_all, label_all = 0, 0  delete, use too much GPU memory
-
         class_num = 10
         centers, sample_num = [0] * class_num, [0] * class_num  # center of each class, number of samples of each class
+
+        # flag = 1
         for _, x, y in tqdm(data.train):
             x, y = x.to(device), y.to(device)
 
             output, features = model(x)
+            _, pred = output.max(1)
+
+            # if epoch % 5 == 0 and flag == 1:
+            #     print(pred)
+            #     flag = 0
 
             optimizer.zero_grad()
             loss = loss_fn(output, y)
@@ -63,13 +70,7 @@ def train_attack():
             optimizer.step()
             train_loss += loss.item()
 
-            # if isinstance(feature_all, int):
-            #     feature_all = features
-            #     label_all = y
-            # else:
-            #     feature_all = torch.cat((feature_all, features))
-            #     label_all = torch.cat((label_all, y))
-
+            # todo if multi-gpus, can compute centers this way
             # # compute centers
             # for i in range(len(features)):
             #     class_idx = y[i]
@@ -81,10 +82,9 @@ def train_attack():
         if args.class_loss:
             data_2 = load_cifar10(5000)
 
-            # torch.backends.cudnn.enabled = False
+            class_loss, var, inter = 0., 0., 0.
             for _, x, y in tqdm(data_2.train):
-                centers, sample_num = [0] * class_num, [
-                    0] * class_num  # center of each class, number of samples of each class
+                centers, sample_num = [0] * class_num, [0] * class_num  # center of each class, number of samples of each class
 
                 x, y = x.to(device), y.to(device)
 
@@ -97,22 +97,26 @@ def train_attack():
                             sample_num[class_idx] + 1)
                     sample_num[class_idx] += 1
 
-                loss = loss_fn_2(features, y, centers)
+                var_loss = loss_fn_2(features, y, centers)
                 inter_loss = loss_fn_2.compute_inter_loss(centers)
 
-                loss += inter_loss
+                alpha, beta = 0.0001, 0.001
+                loss = alpha * var_loss + beta * inter_loss
 
                 optimizer.zero_grad()
                 loss.backward()
                 optimizer.step()
 
+                var += alpha * var_loss.item()
+                inter += beta * inter_loss.item()
+
             # optimizer.zero_grad()
             # inter_loss.backward()
             # optimizer.step()
             tocks = time.time()
-            print("epoch: {}/{}, train loss: {:.3f}, class loss: {:3f}, train cost {:.2f} s".format(epoch, args.epoch,
+            print("epoch: {}/{}, train loss: {:.3f}, var loss: {:3f}, inter loss: {:3f}, train cost {:.2f} s".format(epoch, args.epoch,
                                                                                                     train_loss,
-                                                                                                    loss.item(),
+                                                                                                    var, inter,
                                                                                                     tocks - ticks))
         else:
             tocks = time.time()
@@ -134,14 +138,31 @@ def train_attack():
             output, _ = model(x_pgd)
             _, pred_pgd = output.max(1)
 
+            # if epoch == 5:
+            #     print(pred)
+
             metrics.total += y.shape[0]
             metrics.correct += torch.eq(pred, y).sum().item()
             metrics.correct_fgm += torch.eq(pred_fgm, y).sum().item()
             metrics.correct_pgd += torch.eq(pred_pgd, y).sum().item()
 
-        print("test acc on clean examples (%): {:3f}".format(metrics.correct / metrics.total * 100.0))
-        print("test acc on fgm examples (%): {:3f}".format(metrics.correct_fgm / metrics.total * 100.0))
-        print("test acc on pgd examples (%): {:3f}".format(metrics.correct_pgd / metrics.total * 100.0))
+        acc = metrics.correct / metrics.total * 100.0
+        fgm_acc = metrics.correct_fgm / metrics.total * 100.0
+        pgd_acc = metrics.correct_pgd / metrics.total * 100.0
+        print("test acc on clean examples (%): {:.3f}".format(acc))
+        print("test acc on fgm examples (%): {:.3f}".format(fgm_acc))
+        print("test acc on pgd examples (%): {:.3f}".format(pgd_acc))
+
+        if acc > best.acc or fgm_acc > best.fgm_acc or pgd_acc > best.pgd_acc:
+            print("This epoch is better!")
+            if acc > best.acc:
+                best.acc = acc
+            if fgm_acc > best.fgm_acc:
+                best.fgm_acc = fgm_acc
+            if pgd_acc > best.pgd_acc:
+                best.pgd_acc = pgd_acc
+
+        print()
 
     if args.plot:
         root = 'figures/'
@@ -172,8 +193,8 @@ def train_attack():
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument("--epoch", type=int, default=100)
-    parser.add_argument("--batch_size", "-bsz", type=int, default=64)
+    parser.add_argument("--epoch", "-ep", type=int, default=100)
+    parser.add_argument("--batch_size", "-bsz", type=int, default=512)
     parser.add_argument("--eps", type=float, default=0.3, help="eps to constrain AE (adversarial examples)")
     parser.add_argument("--iter", type=int, default=10, help='iter nums to update AE, K in PGD-K')
     parser.add_argument("--lr", type=float, default=0.01, help='learning rate of iterative attack method')
@@ -187,7 +208,7 @@ if __name__ == '__main__':
     parser.add_argument("--testdir", type=str, default='test_feature_distribute',
                         help="save-dir of train feature scatter diagram")
     # loss
-    parser.add_argument("--class_loss", '-cl', action='store_true', default=True, help="whether add class loss")
+    parser.add_argument("--class_loss", '-cl', action='store_true', default=False, help="whether add class loss")
     parser.add_argument("--plot", '-plt', action='store_true', default=False, help="whether to plot features")
 
     args = parser.parse_args()
