@@ -8,6 +8,7 @@ from easydict import EasyDict
 from attacks.FGM import fast_gradient_method
 from attacks.PGD import projected_gradient_descent
 from datasets.cifar import load_cifar10
+from feature_loss import Class_loss
 from networks.Kervolution import Ker_ResNet18, Ker_ResNet34
 from networks.resnet import ResNet18, ResNet34, ResNet50, ResNet101, ResNet152
 
@@ -15,24 +16,26 @@ import time
 from functools import partial
 from tsne import tsne
 
+
 def train_attack():
-    data = data = load_cifar10(512)  # Load train and test data
-    if args.model=='resnet18':
+    data = load_cifar10(args.batch_size)  # Load train and test data
+    if args.model == 'resnet18':
         model = ResNet18()
-    elif args.model=='resnet34':
+    elif args.model == 'resnet34':
         model = ResNet34()
-    elif args.model=='resnet50':
+    elif args.model == 'resnet50':
         model = ResNet50()
-    elif args.model=='resnet101':
+    elif args.model == 'resnet101':
         model = ResNet101()
-    elif args.model=='resnet152':
+    elif args.model == 'resnet152':
         model = ResNet152()
-    elif args.model=='ker_resnet18':
+    elif args.model == 'ker_resnet18':
         model = Ker_ResNet18()
-    elif args.model=='ker_resnet34':
+    elif args.model == 'ker_resnet34':
         model = Ker_ResNet34()
 
     loss_fn = nn.CrossEntropyLoss()
+    loss_fn_2 = Class_loss(10)
     optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -40,24 +43,82 @@ def train_attack():
         model = model.cuda()
 
     ticks0 = time.time()
-    for epoch in range(1, args.epoch+1):
+    for epoch in range(1, args.epoch + 1):
         train_loss = 0.0
         ticks = time.time()
         model.train()  # train mode
+
+        # feature_all, label_all = 0, 0  delete, use too much GPU memory
+
+        class_num = 10
+        centers, sample_num = [0] * class_num, [0] * class_num  # center of each class, number of samples of each class
         for _, x, y in tqdm(data.train):
             x, y = x.to(device), y.to(device)
-            
-            output, _ = model(x)
-            
+
+            output, features = model(x)
+
             optimizer.zero_grad()
             loss = loss_fn(output, y)
             loss.backward()
             optimizer.step()
             train_loss += loss.item()
-        tocks = time.time()
 
-        print("epoch: {}/{}, train loss: {:.3f}, train cost {:.2f} s".format(epoch, args.epoch, train_loss, tocks-ticks))
-        
+            # if isinstance(feature_all, int):
+            #     feature_all = features
+            #     label_all = y
+            # else:
+            #     feature_all = torch.cat((feature_all, features))
+            #     label_all = torch.cat((label_all, y))
+
+            # # compute centers
+            # for i in range(len(features)):
+            #     class_idx = y[i]
+            #     centers[class_idx] = (centers[class_idx] * sample_num[class_idx] + features[i]) / (
+            #             sample_num[class_idx] + 1)
+            #     sample_num[class_idx] += 1
+
+        # after one epoch, compute the variance loss and inter-class loss
+        if args.class_loss:
+            data_2 = load_cifar10(5000)
+
+            # torch.backends.cudnn.enabled = False
+            for _, x, y in tqdm(data_2.train):
+                centers, sample_num = [0] * class_num, [
+                    0] * class_num  # center of each class, number of samples of each class
+
+                x, y = x.to(device), y.to(device)
+
+                output, features = model(x)
+
+                # compute centers
+                for i in range(len(features)):
+                    class_idx = y[i]
+                    centers[class_idx] = (centers[class_idx] * sample_num[class_idx] + features[i]) / (
+                            sample_num[class_idx] + 1)
+                    sample_num[class_idx] += 1
+
+                loss = loss_fn_2(features, y, centers)
+                inter_loss = loss_fn_2.compute_inter_loss(centers)
+
+                loss += inter_loss
+
+                optimizer.zero_grad()
+                loss.backward()
+                optimizer.step()
+
+            # optimizer.zero_grad()
+            # inter_loss.backward()
+            # optimizer.step()
+            tocks = time.time()
+            print("epoch: {}/{}, train loss: {:.3f}, class loss: {:3f}, train cost {:.2f} s".format(epoch, args.epoch,
+                                                                                                    train_loss,
+                                                                                                    loss.item(),
+                                                                                                    tocks - ticks))
+        else:
+            tocks = time.time()
+            print("epoch: {}/{}, train loss: {:.3f}, train cost {:.2f} s".format(epoch, args.epoch, train_loss,
+                                                                                 tocks - ticks))
+
         model.eval()
         metrics = EasyDict(correct=0, correct_fgm=0, total=0, correct_pgd=0)
         for _, x, y in tqdm(data.test):
@@ -72,7 +133,7 @@ def train_attack():
             _, pred_fgm = output.max(1)
             output, _ = model(x_pgd)
             _, pred_pgd = output.max(1)
-            
+
             metrics.total += y.shape[0]
             metrics.correct += torch.eq(pred, y).sum().item()
             metrics.correct_fgm += torch.eq(pred_fgm, y).sum().item()
@@ -81,45 +142,57 @@ def train_attack():
         print("test acc on clean examples (%): {:3f}".format(metrics.correct / metrics.total * 100.0))
         print("test acc on fgm examples (%): {:3f}".format(metrics.correct_fgm / metrics.total * 100.0))
         print("test acc on pgd examples (%): {:3f}".format(metrics.correct_pgd / metrics.total * 100.0))
-    
-    root = 'figures/'
-    train_save_dir = os.path.join(root, args.traindir)+'.jpg'
-    test_save_dir = os.path.join(root, args.testdir)+'.jpg'
 
-    temp = 1
-    if (os.path.exists(train_save_dir)): print('Save-dir of train feature scatter diagram exists! Please add remarks!')
-    while (os.path.exists(train_save_dir)):
-        train_save_dir = os.path.join(root, args.traindir)+str(temp)+'.jpg'
-        temp += 1
-   
-    temp = 1
-    if (os.path.exists(test_save_dir)): print('Save-dir of test feature scatter diagram exists! Please add remarks!')
-    while (os.path.exists(test_save_dir)):
-        test_save_dir = os.path.join(root, args.testdir)+str(temp)+'.jpg'
-        temp += 1
+    if args.plot:
+        root = 'figures/'
+        train_save_dir = os.path.join(root, args.traindir) + '.jpg'
+        test_save_dir = os.path.join(root, args.testdir) + '.jpg'
 
-    print("train feature scatter diagram save dir:{}".format(train_save_dir))
-    print("test feature scatter diagram save dir:{}".format(test_save_dir))
-    
-    tsne(model, device, data.train, train_save_dir)
-    tsne(model, device, data.test, test_save_dir)
+        temp = 1
+        if (os.path.exists(train_save_dir)): print('Save-dir of train feature scatter diagram exists! Please add remarks!')
+        while (os.path.exists(train_save_dir)):
+            train_save_dir = os.path.join(root, args.traindir) + str(temp) + '.jpg'
+            temp += 1
+
+        temp = 1
+        if (os.path.exists(test_save_dir)): print('Save-dir of test feature scatter diagram exists! Please add remarks!')
+        while (os.path.exists(test_save_dir)):
+            test_save_dir = os.path.join(root, args.testdir) + str(temp) + '.jpg'
+            temp += 1
+
+        print("train feature scatter diagram save dir:{}".format(train_save_dir))
+        print("test feature scatter diagram save dir:{}".format(test_save_dir))
+
+        tsne(model, device, data.train, train_save_dir)
+        tsne(model, device, data.test, test_save_dir)
 
     tocks0 = time.time()
-    print("total cost {:.2f} s".format(tocks0-ticks0))
-    
-    
+    print("total cost {:.2f} s".format(tocks0 - ticks0))
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument("--epoch", type=int, default=30)
+    parser.add_argument("--epoch", type=int, default=100)
+    parser.add_argument("--batch_size", "-bsz", type=int, default=64)
     parser.add_argument("--eps", type=float, default=0.3, help="eps to constrain AE (adversarial examples)")
     parser.add_argument("--iter", type=int, default=10, help='iter nums to update AE, K in PGD-K')
     parser.add_argument("--lr", type=float, default=0.01, help='learning rate of iterative attack method')
     parser.add_argument("--atm", type=str, default="pgd", help="which attack method to use")
-    parser.add_argument('--lambd', type = float, default=2, help ="ratio of Feature loss to SCE loss")
-    parser.add_argument("--model", type=str, default='resnet18',choices=["resnet18", "resnet34", "resnet50", "resnet101", "resnet152", "ker_resnet18", "ker_resnet34"],help="choose a model")
-    parser.add_argument("--traindir", type=str, default='train_feature_distribute', help="save-dir of train feature scatter diagram")
-    parser.add_argument("--testdir", type=str, default='test_feature_distribute', help="save-dir of train feature scatter diagram")
+    parser.add_argument('--lambd', type=float, default=2, help="ratio of Feature loss to SCE loss")
+    parser.add_argument("--model", type=str, default='resnet18',
+                        choices=["resnet18", "resnet34", "resnet50", "resnet101", "resnet152", "ker_resnet18",
+                                 "ker_resnet34"], help="choose a model")
+    parser.add_argument("--traindir", type=str, default='train_feature_distribute',
+                        help="save-dir of train feature scatter diagram")
+    parser.add_argument("--testdir", type=str, default='test_feature_distribute',
+                        help="save-dir of train feature scatter diagram")
+    # loss
+    parser.add_argument("--class_loss", '-cl', action='store_true', default=True, help="whether add class loss")
+    parser.add_argument("--plot", '-plt', action='store_true', default=False, help="whether to plot features")
+
     args = parser.parse_args()
-    print('epoch:{}  eps to constrain AE:{}  iter nums to update AE:{}  learning rate of iterative attack method:{}'.format(args.epoch, args.eps, args.iter, args.lr))
+    print(
+        'epoch:{}  eps to constrain AE:{}  iter nums to update AE:{}  learning rate of iterative attack method:{}'.format(
+            args.epoch, args.eps, args.iter, args.lr))
     print('atm:{}  lambd(ratio of Feature loss to SCE loss):{}  model:{}'.format(args.atm, args.lambd, args.model))
     train_attack()
