@@ -5,8 +5,7 @@ import torch.nn as nn
 from tqdm import tqdm
 from easydict import EasyDict
 
-from attacks.FGM import fast_gradient_method
-from attacks.PGD import projected_gradient_descent
+from attacks.gradient_based import projected_gradient_descent, fast_gradient_method
 from datasets.mnist import load_mnist
 from networks.Kervolution import Ker_ResNet18, Ker_ResNet34
 from networks.resnet import ResNet18, ResNet34, ResNet50, ResNet101, ResNet152

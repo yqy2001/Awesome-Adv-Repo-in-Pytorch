@@ -14,7 +14,7 @@ from easydict import EasyDict
 from tqdm import tqdm
 
 from LA_pytorch import Lookahead
-from attacks.PGD import projected_gradient_descent, clip_perturbation
+from attacks.gradient_based import projected_gradient_descent, clip_perturbation
 from datasets.cifar import load_cifar10
 from networks.resnet import ResNet50
 
