@@ -19,8 +19,7 @@ import torchvision
 from easydict import EasyDict
 from tqdm import tqdm
 
-from attacks.PGD import projected_gradient_descent
-from attacks.utils import clip_perturbation
+from attacks.PGD import projected_gradient_descent, clip_perturbation
 from datasets.cifar import *
 from networks.resnet import ResNet50
 
